@@ -1,6 +1,5 @@
 package com.tianfang.admin.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,9 +15,6 @@ import com.tianfang.common.digest.MD5Coder;
 import com.tianfang.common.ext.ExtPageQuery;
 import com.tianfang.common.model.MessageResp;
 import com.tianfang.common.model.PageResult;
-import com.tianfang.common.util.JsonUtil;
-import com.tianfang.train.dto.TeamDto;
-import com.tianfang.train.service.ITeamService;
 import com.tianfang.user.dto.UserDto;
 import com.tianfang.user.service.IUserService;
 
@@ -185,14 +181,14 @@ public class UserController extends BaseController{
         return result;
     }
     
-	private void assemblyTreeNodes(String teamId, List<TeamDto> teamList) {
-		if (null != teamList && teamList.size() > 0 && null != teamId && !"".equals(teamId.trim())){
-        	for (TeamDto dto : teamList){
-        		if (dto.getId().equals(teamId)){
-        			dto.setChecked(true);
-        			break;
-        		}
-        	}
-        }
-	}
+//	private void assemblyTreeNodes(String teamId, List<TeamDto> teamList) {
+//		if (null != teamList && teamList.size() > 0 && null != teamId && !"".equals(teamId.trim())){
+//        	for (TeamDto dto : teamList){
+//        		if (dto.getId().equals(teamId)){
+//        			dto.setChecked(true);
+//        			break;
+//        		}
+//        	}
+//        }
+//	}
 }
