@@ -100,13 +100,7 @@
     		<artifactId>waihui-common</artifactId>
     		<version>0.0.1-SNAPSHOT</version>       
         </dependency>
-        
-        <dependency>
-            <groupId>com.tianfang</groupId>
-    		<artifactId>waihui-train-api</artifactId>
-    		<version>0.0.1-SNAPSHOT</version>       
-        </dependency>
-        
+                
         <dependency>
             <groupId>com.tianfang</groupId>
     		<artifactId>waihui-message-api</artifactId>
