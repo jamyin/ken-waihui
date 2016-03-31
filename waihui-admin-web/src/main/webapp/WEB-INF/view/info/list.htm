@@ -37,7 +37,17 @@
 								<i id="nav-search-icon" class="icon-search"></i>
 							</span>
 						</td>
-						<td style="vertical-align:top;">
+					<!-- 	<td style="vertical-align: top;"><select
+											class="chzn-select" name="menuType" id="menuType"
+											data-placeholder="菜单级别"
+											style="vertical-align: top; width: 100px;">
+												<option value=""></option> <#list menuTypes as type>
+												<option<#if (params.menuType?? &&
+													params.menuType?eval ==
+													type.getIndex())>selected="selected"</#if>
+													value="${type.getIndex()}">${type.getName()}</option> </#list>
+						</select></td> -->
+						<!-- <td style="vertical-align:top;">
 							<select class="chzn-select" name="parentType" id="parentType" data-placeholder="请选择资讯类型">
 								<option value=""></option>
 								<#if parentTypes??>
@@ -46,8 +56,8 @@
 									</#list>
 								</#if> 
 							</select>
-						</td>
-						<td style="vertical-align:top;<#if (params.parentType!-1) == 0 >display:none</#if>" id="sub_div">
+						</td> -->
+						<!-- <td style="vertical-align:top;<#if (params.parentType!-1) == 0 >display:none</#if>" id="sub_div">
 							<#if (params.parentType!-1) == 1>
 								<select class="chzn-select" name="subType" data-placeholder="请选择二级类型">
 									<option value=""></option>;
@@ -58,7 +68,7 @@
 									</#if> 
 								</select>
 							</#if>
-						</td>
+						</td> -->
 						<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();" title="检索"><i id="nav-search-icon" class="icon-search">检索</i></button></td>
 					</tr>
 				</tbody></table>				
@@ -233,7 +243,7 @@
 				//iframe层-父子操作
 				layer.open({
 					type: 2,
-				    title: '编辑新闻',
+				    title: '编辑资讯',
 				    area: ['60%', '90%'],
 				    fix: true, //不固定
 				    maxmin: true,
@@ -349,7 +359,7 @@
 				//iframe层-父子操作
 				layer.open({
 					type: 2,
-				    title: '新增新闻',
+				    title: '新增资讯',
 				    area: ['60%', '90%'],
 				    fix: true, //不固定
 				    maxmin: true,

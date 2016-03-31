@@ -69,7 +69,7 @@
 								<div class="control-group">	
 								<label class="control-label" for="form-field-2">菜单级别</label> 	
 									<div class="controls">	
-									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 250px;">
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
 												<option value="${type.getIndex()!}">${type.getName()}</option>
 											</#list>
@@ -245,13 +245,13 @@
 				/* if (null == $("[name=parentType]").val() || '' == $("[name=parentType]").val()) {
 					layer.alert('资讯类型不能为空~', { icon: 7 });
 					return;
-				} */
+				} 
 				if (1 == $("[name=parentType]").val()) {
 					if (null == $("[name=subType]").val() || '' == $("[name=subType]").val()) {
 						layer.alert('健康食谱类型不能为空~', { icon: 7 });
 						return;
 					}
-				}
+				}*/
 				
 				var ajaxParams = $("#submitForm").serialize();
 				$.ajax({
