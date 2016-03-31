@@ -32,6 +32,7 @@ public class InformationController extends BaseController{
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
         PageResult<InformationDto> result = infoService.findInformationByParam(dto, page.changeToPageQuery());
         mv.setViewName("/info/list");
+        mv.addObject("menuTypes", MenuTypeEnums.getValus());
         mv.addObject("pageList", result);
         mv.addObject("parentTypes", InformationType.values());
         mv.addObject("subTypes", CookBookType.values());
