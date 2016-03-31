@@ -20,12 +20,29 @@
 							<!-- PAGE CONTENT BEGINS HERE -->
 							<form id="submitForm" class="form-horizontal" action="${base}/sport/newsInfo/saveNew.do" method="POST">
 								<input type="hidden" id="pics" name="pics" value=""/>
+								<!-- <input type="hidden" id="described" name="described" value=""/>
+								<input type="hidden" id="enDescribed" name="enDescribed" value=""/> -->
 								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-1">相片名称</label>
 									<div class="controls">
 										<input type="text" name="title" class="span10" id="form-field-1" placeholder="相片名称">
 									</div>
 								</div> -->
+								
+								<div class="control-group">
+									<label class="control-label" for="form-field-1">中文标题</label>
+									<div class="controls">
+										<input type="text" name="title" class="span10" id="form-field-1" placeholder="中文标题"  style="vertical-align:top;width: 250px;">
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label" for="form-field-1">英文标题</label>
+									<div class="controls">
+										<input type="text" name="enTitle" class="span10" id="form-field-1" placeholder="英文标题"  style="vertical-align:top;width: 250px;">
+									</div>
+								</div>
+								
 								<div class="control-group">
 									<label class="control-label" for="form-field-2">上传相片</label>
 									<div class="controls">
@@ -41,15 +58,25 @@
 										<input type="text" name="pageRanking" class="span10" id="form-field-1" placeholder="相片排序">
 									</div>
 								</div> -->
-								<div class="control-group">	
+								<!-- <div class="control-group">	
 								<label class="control-label" for="form-field-2">所属相册</label> 	
 									<div class="controls">	
 									 	<select  name="albumId" id="albumId" data-placeholder="所属相册" style="vertical-align:top;width: 250px;">
-										<!-- <option value="">无</option> -->
+										<option value="">无</option>
+										</select>
+									</div>
+								</div> -->
+								<div class="control-group">	
+								<label class="control-label" for="form-field-2">菜单级别</label> 	
+									<div class="controls">	
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 250px;">
+											<#list menuTypes as type>
+												<option value="${type.getIndex()!}">${type.getName()}</option>
+											</#list>
 										</select>
 									</div>
 								</div>
-								<div class="control-group">
+								<!-- <div class="control-group">
 								<label class="control-label" for="form-field-2">照片类型</label>
 									<div class="controls">
 										<select  name="picType" id="picType" data-placeholder="照片类型" style="vertical-align:top;width: 250px;">
@@ -57,13 +84,38 @@
 											<option value = 4>教练员培训</option>
 										</select>
 									</div>
-								</div>
+								</div> -->
 								<!-- <div class="control-group">
 									<label class="control-label">咨询内容</label>
 									<div class="controls">
 										<script id="editor" type="text/plain" style="width:769px;height:300px;"></script>
 									</div>
 								</div> -->
+								<!-- <div class="control-group">
+									<label class="course_add_label">中文描述</label>
+									<div class="course_add_input">
+										<script id="described" type="text/plain" style="width:95%;height:200px;"></script>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="course_add_label">英文描述</label>
+									<div class="course_add_input">
+										<script id="enDescribe" type="text/plain" style="width:95%;height:200px;"></script>
+									</div>
+								</div> -->
+								<div class="control-group">
+									<label class="control-label" for="form-field-1">中文描述</label>
+									<div class="controls">
+										<input type="text" name="described" class="span10" id="form-field-1" placeholder="中文描述"  style="vertical-align:top;width: 250px;">
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label" for="form-field-1">英文描述</label>
+									<div class="controls">
+										<input type="text" name="enDescribe" class="span10" id="form-field-1" placeholder="英文描述"  style="vertical-align:top;width: 250px;">
+									</div>
+								</div>
 						
 								<div class="form-actions">
 									<button id='savebutton' class="btn btn-info" type="button"><i class="icon-ok"></i>保存</button>
@@ -119,7 +171,9 @@
 		<script type="text/javascript" src="${base}/plugins/layer2.0/layer.js"></script>
 		
 		<script type="text/javascript">
-		var um = UM.getEditor('editor');
+		/* var described = UM.getEditor('described');
+		var enDescribe = UM.getEditor('enDescribe'); */
+		
 		$(function() {
 		jQuery.ajax({
 			url:'/admin/album/findAlbumList.do',
@@ -241,6 +295,8 @@
 				$("#pics").val(urls);
 				//var micro_pic = $("#id-input-file-3").parent().find("img:first").css("background-image");
 				//$("#thumbnail").val(micro_pic);
+				/* var described = UM.getEditor('described').getContent();
+				var enDescribe = UM.getEditor('enDescribe').getContent(); */
 				var ajaxParams = $("#submitForm").serialize();
 				$.ajax({
 					type : "POST",

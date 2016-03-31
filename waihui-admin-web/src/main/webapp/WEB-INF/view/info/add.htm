@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>新增公告页面</title>
+		<title>新增资讯页面</title>
 		<meta name="description" content="Common form elements and layouts" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<#include "../common/head.htm"/>
@@ -27,9 +27,21 @@
 									</div>
 								</div>
 								<div class="control-group">
+									<label class="control-label" for="form-field-1">英文标题</label>
+									<div class="controls">
+										<input type="text" name="enTitle" class="span10" id="form-field-1" placeholder="英文标题">
+									</div>
+								</div>
+								<div class="control-group">
 									<label class="control-label" for="form-field-8">简介</label>
 									<div class="controls">
-										<textarea class="span10" name="summary" id="form-field-8" placeholder="请输入新闻简介"></textarea>
+										<textarea class="span10" name="summary" id="form-field-8" placeholder="请输入简介"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="form-field-8">英文简介</label>
+									<div class="controls">
+										<textarea class="span10" name="enSummary" id="form-field-8" placeholder="请输入英文简介"></textarea>
 									</div>
 								</div>
 								<div class="control-group">
@@ -41,7 +53,7 @@
 										<img id="img_show" alt="" src="" style="width:60px;height:60px;"/>
 									</div>									
 								</div>
-								<div class="control-group">
+								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-3">资讯类型</label>
 									<div class="controls">
 										<select class="chzn-select" name="parentType" id="parentType" data-placeholder="请选择资讯类型">
@@ -53,6 +65,16 @@
 											</#if> 
 										</select>
 									</div>								
+								</div> -->
+								<div class="control-group">	
+								<label class="control-label" for="form-field-2">菜单级别</label> 	
+									<div class="controls">	
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 250px;">
+											<#list menuTypes as type>
+												<option value="${type.getIndex()!}">${type.getName()}</option>
+											</#list>
+										</select>
+									</div>
 								</div>
 								<div class="control-group" style="display:none" id="sub_div">
 									<label class="control-label" for="form-field-3">健康食谱类型</label>
@@ -220,10 +242,10 @@
 					layer.alert('新闻图片不能为空~', { icon: 7 });
 					return;
 				}
-				if (null == $("[name=parentType]").val() || '' == $("[name=parentType]").val()) {
+				/* if (null == $("[name=parentType]").val() || '' == $("[name=parentType]").val()) {
 					layer.alert('资讯类型不能为空~', { icon: 7 });
 					return;
-				}
+				} */
 				if (1 == $("[name=parentType]").val()) {
 					if (null == $("[name=subType]").val() || '' == $("[name=subType]").val()) {
 						layer.alert('健康食谱类型不能为空~', { icon: 7 });
