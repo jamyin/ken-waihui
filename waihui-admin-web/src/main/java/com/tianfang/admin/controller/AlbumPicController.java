@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianfang.admin.enums.MenuTypeEnums;
 import com.tianfang.admin.utils.PageData;
 import com.tianfang.business.dto.AlbumDto;
 import com.tianfang.business.dto.AlbumPictureDto;
@@ -48,8 +49,9 @@ public class AlbumPicController extends BaseController{
 	public ModelAndView goAdd(){
 		logger.info("去相片新增页面");
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
-		List<AlbumDto> albumList =  iAlbumService.findAlbum(new AlbumDto());
-		mv.addObject("albumList", albumList);
+		/*List<AlbumDto> albumList =  iAlbumService.findAlbum(new AlbumDto());
+		mv.addObject("albumList", albumList);*/
+		mv.addObject("menuTypes", MenuTypeEnums.getValus());
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
@@ -173,10 +175,11 @@ public class AlbumPicController extends BaseController{
 	@RequestMapping(value = "findAlbumPicByPage.do")
 	public ModelAndView findAlbumPicByPage(AlbumPictureDto query, ExtPageQuery page) {
 		logger.info("AlbumPictureDto query : " + query);
-		PageResult<AlbumPictureDto> result = iAlbumPicService.findAlbumPicByPage(query,
+		PageResult<AlbumPictureDto> result = iAlbumPicService.findAlbumPicPage(query,
 				page.changeToPageQuery());
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
 		List<AlbumDto> albumList = iAlbumService.findAlbum(new AlbumDto());
+		mv.addObject("menuTypes", MenuTypeEnums.getValus());
 		mv.addObject("allAlbum", albumList);
 		mv.addObject("pageList", result);
 		mv.addObject("query", query);

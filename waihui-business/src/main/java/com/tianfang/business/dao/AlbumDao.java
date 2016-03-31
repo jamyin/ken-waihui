@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.tianfang.business.mapper.AlbumMapper;
 import com.tianfang.business.pojo.Album;
 import com.tianfang.business.pojo.AlbumExample;
-import com.tianfang.business.pojo.VideoExample;
 import com.tianfang.business.pojo.AlbumExample.Criteria;
 import com.tianfang.common.constants.DataStatus;
 import com.tianfang.common.model.PageQuery;

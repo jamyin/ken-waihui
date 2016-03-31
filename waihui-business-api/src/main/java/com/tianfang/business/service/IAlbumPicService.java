@@ -75,6 +75,13 @@ public interface IAlbumPicService {
 
 	List<AlbumPictureDto> findTeamAlbumPic(AlbumPictureDto albumPictureDto);
 	
-	
+	/**
+	 * 外烩相册单表查询
+	 * @param query
+	 * @param changeToPageQuery
+	 * @return
+	 */
+	PageResult<AlbumPictureDto> findAlbumPicPage(AlbumPictureDto query,
+			PageQuery changeToPageQuery);
 	
 }

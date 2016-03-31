@@ -59,8 +59,11 @@ public class AlbumPictureDto implements Serializable {
 	
 	@Getter
 	@Setter
-    private String title;   //所属相册
+    private String title;   //中文标题
 	
+	@Getter
+	@Setter
+	private String enTitle;  //英文标题 
 	
 	@Getter
 	@Setter
@@ -72,7 +75,11 @@ public class AlbumPictureDto implements Serializable {
 	
 	@Getter
 	@Setter
-	private String described;
+	private String described;   //中文描述
+	
+	@Getter
+	@Setter
+	private String enDescribe;   //英文描述
 	
 	@Getter
 	@Setter
@@ -89,5 +96,9 @@ public class AlbumPictureDto implements Serializable {
 	@Getter
 	@Setter
 	private Integer picType; //相片类型（4：教练员培训）
+	
+	@Getter
+	@Setter	
+    private String menuType; //菜单类型
 	
 }

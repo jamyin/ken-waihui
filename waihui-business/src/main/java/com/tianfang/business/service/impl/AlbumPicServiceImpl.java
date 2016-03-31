@@ -1,5 +1,6 @@
 package com.tianfang.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,33 @@ public class AlbumPicServiceImpl implements IAlbumPicService {
      	    }
         	}
 		long total = albumPicDao.selectAllAlbumPic(albumPic);
+		page.setTotal(total);
+    	return new PageResult<AlbumPictureDto>(page, albumPicDtoList);
+	}
+	
+
+	@Override
+	public PageResult<AlbumPictureDto> findAlbumPicPage(AlbumPictureDto albumPictureDto,
+			PageQuery page) {
+		AlbumPicture albumPic = new AlbumPicture();
+    	BeanUtils.copyProperties( albumPictureDto,albumPic);
+    	List<AlbumPicture> albumPicList = albumPicDao.findAlbumPicPage(albumPic, page);
+    	List<AlbumPictureDto> albumPicDtoList = new ArrayList<AlbumPictureDto>();
+    	if(albumPicList.size()>0){
+    		albumPicDtoList = BeanUtils.createBeanListByTarget(albumPicList, AlbumPictureDto.class);
+        	for(AlbumPictureDto s : albumPicDtoList){
+        		if(s.getCreateTime() != null){
+        			s.setCreateTimeStr(JsonUtil.parseDateStr(s.getCreateTime(), "yyyy-MM-dd"));
+     	    	}else{
+     	    		s.setCreateTimeStr("");
+     	    	}
+     	    	if(s.getLastUpdateTime()!=null){s.setLastUpdateTimeStr(JsonUtil.parseDateStr(s.getLastUpdateTime(),"yyyy-MM-dd"));
+     	    	}else{
+     	    		s.setLastUpdateTimeStr("");
+     	    	}
+     	    }
+        	}
+		long total = albumPicDao.findAlbumPicCount(albumPic);
 		page.setTotal(total);
     	return new PageResult<AlbumPictureDto>(page, albumPicDtoList);
 	}
@@ -118,6 +146,5 @@ public class AlbumPicServiceImpl implements IAlbumPicService {
 		List<AlbumPictureDto> dataList = BeanUtils.createBeanListByTarget(albumPicPicList, AlbumPictureDto.class);
 		return dataList;
 	}
-
 
 }

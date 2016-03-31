@@ -105,4 +105,21 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 		}
 		return mapper.selectByExample(example);
 	}
+
+	public List<AlbumPicture> findAlbumPicPage(AlbumPicture albumPic,
+			PageQuery page) {
+		AlbumPictureExample example = new AlbumPictureExample();
+		AlbumPictureExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause(" create_time DESC limit " + page.getStartNum() +"," + page.getPageSize());
+        assemblyParams(albumPic, criteria);   //组装参数
+        List<AlbumPicture> result = mapper.selectByExample(example);  
+        return result;
+	}
+
+	public long findAlbumPicCount(AlbumPicture albumPic) {
+		AlbumPictureExample example = new AlbumPictureExample();
+		AlbumPictureExample.Criteria criteria = example.createCriteria();
+        assemblyParams(albumPic, criteria);   //组装参数
+        return mapper.countByExample(example);
+	}
 }
