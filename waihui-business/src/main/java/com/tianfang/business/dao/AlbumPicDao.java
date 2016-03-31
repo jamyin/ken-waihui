@@ -72,12 +72,21 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 	 * @param criteria
 	 */
 	private void assemblyParams(AlbumPicture albumPic,Criteria criteria) {
-		if (StringUtils.isNotBlank(albumPic.getId())){
+		if (StringUtils.isNotEmpty(albumPic.getId())){
     		criteria.andIdEqualTo(albumPic.getId());
     	}
-		if (StringUtils.isNotBlank(albumPic.getTitle())){
+		if (StringUtils.isNotEmpty(albumPic.getMenuType())){
+			criteria.andMenuTypeEqualTo(albumPic.getMenuType());
+		}
+		if (StringUtils.isNotEmpty(albumPic.getTitle())){
     		criteria.andTitleLike("%" +albumPic.getTitle()+"%");
     	}
+		if (albumPic.getPicStatus() != null){
+			criteria.andPicStatusEqualTo(albumPic.getPicStatus());
+		}
+		if (StringUtils.isNotEmpty(albumPic.getTitle())){
+			criteria.andTitleLike("%" +albumPic.getTitle()+"%");
+		}
     	criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 

@@ -35,6 +35,10 @@ public class InformationDto implements Serializable {
     @Getter
     @Setter
     private String title;
+    
+    @Getter
+    @Setter
+    private String enTitle; //英文标题
 
     /**
      * 缩略图
@@ -49,6 +53,10 @@ public class InformationDto implements Serializable {
     @Getter
     @Setter
     private String summary;
+    
+    @Getter
+    @Setter
+    private String enSummary;   //英文简介
 
     /**
      * 内容
@@ -96,4 +104,8 @@ public class InformationDto implements Serializable {
     @Getter
     @Setter
     private Integer stat;
+    
+    @Getter
+    @Setter
+    private String menuType; 	//菜单级别 
 }

@@ -62,7 +62,7 @@
 										</select>
 								</span>
 						</td> -->
-										<td style="vertical-align: top;"><select
+										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="albumId" id="albumId"
 											data-placeholder="所属相册"
 											style="vertical-align: top; width: 250px;">
@@ -70,6 +70,21 @@
 												allAlbum as a>
 												<option value="${(a.id)!}">${(a.title)!}</option> </#list>
 												</#if>
+										</select></td> -->
+										<td><span class="input-icon"> <input
+												autocomplete="off" id="nav-search-input" type="text"
+												name="title" value="${(query.title)!}" placeholder="中文标题">
+												<i id="nav-search-icon" class="icon-search"></i>
+										</span></td>
+										<td style="vertical-align: top;"><select
+											class="chzn-select" name="menuType" id="menuType"
+											data-placeholder="菜单级"
+											style="vertical-align: top; width: 79px;">
+												<option value="-1"></option> <#list menuTypes as type>
+												<option<#if (query.menuType?? &&
+													query.menuType?eval ==
+													type.getIndex())>selected="selected"</#if>
+													value="${type.getIndex()}">${type.getName()}</option> </#list>
 										</select></td>
 										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="teamId" id="teamId"
@@ -85,18 +100,18 @@
 											class="chzn-select" name="picStatus" id="picStatus"
 											data-placeholder="审核状态"
 											style="vertical-align: top; width: 120px;">
-												<option value="">全部</option>
+												<option value="">审核状态</option>
 												<option value="0">待审核</option>
 												<option value="1">审核通过</option>
 												<option value="2">审核不通过</option>
 										</select></td>
-										<td style="vertical-align: top;"><select
+										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="picType" id="picType"
 											data-placeholder="照片类型"
 											style="vertical-align: top; width: 120px;">
 												<option value="">全部类型</option>
 												<option value="4">教练培训</option>
-										</select></td>
+										</select></td> -->
 
 										<!-- <td>上传时间：
 						<input class="span10 date-picker" name="startTimeStr" id="createTimeS"  value="${(newsDto.startTimeStr)!}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="最近登录开始"/>
@@ -129,15 +144,18 @@
 										<th class="center" style="width: 50px;"><label><input
 												type="checkbox" /><span class="lbl"></span></label></th>
 										<!-- <th>相片名称</th> -->
-										<th>缩略图</th>
-										<th>所属相册</th>
+										<th style="width: 100px;">缩略图</th>
+										<!-- <th>所属相册</th> -->
 										<!-- <th>所属球队</th> -->
-										<th>照片类型</th>
+										<!-- <th>照片类型</th> -->
 										<!-- <th>上传人</th> -->
-										<th class="hidden-phone"><i
+										<th style="width: 100px;">菜单类型</th>
+										<th style="width: 200px;">标题</th>
+										<th style="width: 200px;">英文标题</th>
+										<th class="hidden-phone" style="width: 100px;"><i
 											class="icon-time hidden-phone"></i>上传时间</th>
-										<th>审核状态</th>
-										<th>操作</th>
+										<th style="width: 100px;">审核状态</th>
+										<th style="width: 100px;">操作</th>
 									</tr>
 								</thead>
 
@@ -157,17 +175,24 @@
 												</a>
 											</div>
 										</td>
-										<td><#if page.title??> ${(page.title)!} <#else> <span
+										<!-- <td><#if page.title??> ${(page.title)!} <#else> <span
 											class='label label-warning'>未放入相册</span> </#if>
-										</td>
+										</td> -->
 										<!-- <td><#if page.teamName??> ${(page.teamName)!} <#else> <span
 											class='label label-warning'>无对应球队</span> </#if>
 										</td> -->
-										<td class='hidden-phone'>
+										<!-- <td class='hidden-phone'>
 											<#if page.picType??> <span class='label label-success'>教练培训</span> 
 											<#else> <span class='label label-warning'>无</span> </#if>
-										</td>
+										</td> -->
 										<!-- <td class='hidden-phone'>${(page.publisher)!}</td> -->
+										<td class='hidden-phone'><#if page.menuType??> <#list
+											menuTypes as type> <#if page.menuType?eval ==
+											type.getIndex()>${type.getName()}</#if> </#list> <#else> <span
+											class='label label-warning'>未加入菜单</span> </#if>
+										</td>
+										<td class='hidden-phone'>${(page.title)!}</td>
+										<td class='hidden-phone'>${(page.enTitle)!}</td>
 										<td class='hidden-phone'>${(page.createTimeStr)!}</td>
 
 										<td class='hidden-phone'><#if page.picStatus = 1 > <span
@@ -194,8 +219,8 @@
 												<#elseif page.picStatus = 2 > <a id="audit"
 													data-obj-id="${(page.id)!}" data-obj-stat="1"
 													class='btn btn-mini btn-success' title="审核通过"><i
-													class=''></i>审核通过</a> </#if> 
-													<!-- <a id='setPageOver'
+													class=''></i>审核通过</a> </#if>
+												<!-- <a id='setPageOver'
 													data-obj-id="${(page.id)!}" class='btn btn-mini btn-purple'
 													title="设置球队首页图片"><i class='icon-pencil'>设置图片</i></a> -->
 											</div>
@@ -496,7 +521,7 @@
 				//iframe层-父子操作
 				layer.open({
 				    type: 2,
-				    area: ['700px', '400px'],
+				    area: ['750px', '600px'],
 				    title:'新增相片',
 				    fix: true, //不固定
 				    maxmin: false,

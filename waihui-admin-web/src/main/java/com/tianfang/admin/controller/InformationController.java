@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianfang.admin.dto.AdminDto;
+import com.tianfang.admin.enums.MenuTypeEnums;
 import com.tianfang.common.constants.DataStatus;
 import com.tianfang.common.ext.ExtPageQuery;
 import com.tianfang.common.model.PageResult;
@@ -41,6 +42,7 @@ public class InformationController extends BaseController{
 	@RequestMapping(value = "add")
 	public ModelAndView add(){
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
+		mv.addObject("menuTypes", MenuTypeEnums.getValus());
 		mv.addObject("parentTypes", InformationType.values());
 	    mv.addObject("subTypes", CookBookType.values());
         mv.setViewName("/info/add");
