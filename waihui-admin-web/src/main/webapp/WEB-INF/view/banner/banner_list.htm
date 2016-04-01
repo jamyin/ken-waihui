@@ -63,8 +63,10 @@
 									<tr>
 										<th style="width:50px;" class="center"><label><input type="checkbox" /><span
 												class="lbl"></span></label></th>
-										<th style="width:200px;" class="center">标题</th>
-										<th style="width:80px;" class="center">缩略图</th>
+										<th style="width:150px;" class="center">中文标题</th>
+										<th style="width:150px;" class="center">英文标题</th>
+										<th style="width:80px;" class="center">缩略图1</th>
+										<th style="width:80px;" class="center">缩略图2</th>
 										<th style="width:600px;" class="center">描述</th>
 										<th style="width:600px;" class="center">跳转路径</th>
 										<th style="width:80px;" class="center">类型</th>
@@ -85,7 +87,9 @@
 												del-id="${(page.id)!}" /><span class="lbl"></span></label></td>
 										<!-- <td><a href='#' style="vertical-align: top; width: 250px;">${(page.title)!}</a></td> -->
 										<td class='hidden-phone'>${(page.title)!}</td>
+										<td class='hidden-phone'>${(page.enTitle)!}</td>
 										<td><img style="width: 45px; height: 45px;" src="${imgurl}${(page.img)!}"/></td>
+										<td><img style="width: 45px; height: 45px;" src="${imgurl}${(page.pic)!}"/></td>
 										<td class='hidden-phone'>${(page.note)!}</td>
 										<td class='hidden-phone'>${(page.url)!}</td>
 										<td>

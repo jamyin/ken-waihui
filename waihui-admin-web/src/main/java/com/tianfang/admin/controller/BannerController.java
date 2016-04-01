@@ -101,7 +101,12 @@ public class BannerController extends BaseController {
 	@RequestMapping(value="/update")
 	public Response<String> updateBanner(BannerDto bannerDto){
 		Response<String> data = new Response<String>();
-		
+		if (StringUtils.isBlank(bannerDto.getPic())) {
+			bannerDto.setPic(null);
+		}
+		if (StringUtils.isBlank(bannerDto.getImg())) {
+			bannerDto.setImg(null);
+		}
 		int flag = bannerService.updateBanner(bannerDto);
 		if(flag > 0){
 			data.setMessage("编辑轮播图成功");

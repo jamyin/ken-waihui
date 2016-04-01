@@ -25,11 +25,19 @@ public class BannerDto implements Serializable {
 	@Getter
 	@Setter
     private String title;
+	
+	@Getter
+	@Setter
+	private String enTitle;
 
 	@Getter
 	@Setter
     private String img;
 
+	@Getter
+	@Setter
+	private String pic;
+	
 	@Getter
 	@Setter
     private String url;
