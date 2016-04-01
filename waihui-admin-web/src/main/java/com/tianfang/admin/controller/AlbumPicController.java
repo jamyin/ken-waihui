@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianfang.admin.enums.AuditStatusEnums;
 import com.tianfang.admin.enums.MenuTypeEnums;
 import com.tianfang.admin.utils.PageData;
 import com.tianfang.business.dto.AlbumDto;
@@ -180,6 +181,7 @@ public class AlbumPicController extends BaseController{
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
 		List<AlbumDto> albumList = iAlbumService.findAlbum(new AlbumDto());
 		mv.addObject("menuTypes", MenuTypeEnums.getValus());
+		mv.addObject("auditTypes", AuditStatusEnums.getValus());
 		mv.addObject("allAlbum", albumList);
 		mv.addObject("pageList", result);
 		mv.addObject("query", query);

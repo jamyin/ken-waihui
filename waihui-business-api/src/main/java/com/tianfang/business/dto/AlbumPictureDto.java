@@ -24,6 +24,10 @@ public class AlbumPictureDto implements Serializable {
 	@Getter
 	@Setter
     private String pic;
+	
+	@Getter
+	@Setter
+	private String shadowPic;       //阴影图地址
 
 	@Getter
 	@Setter
