@@ -75,7 +75,7 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 		if (StringUtils.isNotEmpty(albumPic.getId())){
     		criteria.andIdEqualTo(albumPic.getId());
     	}
-		if (StringUtils.isNotEmpty(albumPic.getMenuType())){
+		if (StringUtils.isNotEmpty(albumPic.getMenuType()) && !Objects.equal(albumPic.getMenuType(), "-1")){
 			criteria.andMenuTypeEqualTo(albumPic.getMenuType());
 		}
 		if (StringUtils.isNotEmpty(albumPic.getTitle())){
