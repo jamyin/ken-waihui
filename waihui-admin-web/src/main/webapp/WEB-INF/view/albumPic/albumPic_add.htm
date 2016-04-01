@@ -53,6 +53,15 @@
 									</div>	
 								</div>
 								<!-- <div class="control-group">
+									<label class="control-label" for="form-field-2">阴影图</label>
+									<div class="controls">
+										<input multiple type="file" id="id-input-file-3"/>
+									</div>
+									<div class="controls" id="img_contain">
+										<img id="img_show" alt="" src="" style="width:60px;height:60px;"/>
+									</div>	
+								</div> -->
+								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-1">相片排序</label>
 									<div class="controls">
 										<input type="text" name="pageRanking" class="span10" id="form-field-1" placeholder="相片排序">
@@ -69,7 +78,7 @@
 								<div class="control-group">	
 								<label class="control-label" for="form-field-2">菜单级别</label> 	
 									<div class="controls">	
-									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 250px;">
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
 												<option value="${type.getIndex()!}">${type.getName()}</option>
 											</#list>
@@ -104,18 +113,24 @@
 									</div>
 								</div> -->
 								<div class="control-group">
-									<label class="control-label" for="form-field-1">中文描述</label>
+									<label class="control-label" for="form-field-8">中文描述</label>
 									<div class="controls">
-										<input type="text" name="described" class="span10" id="form-field-1" placeholder="中文描述"  style="vertical-align:top;width: 250px;">
+										<textarea class="span10" name="described" id="described" placeholder="中文描述"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="form-field-8">英文描述</label>
+									<div class="controls">
+										<textarea class="span10" name="enDescribe" id="enDescribe" placeholder="英文描述"></textarea>
 									</div>
 								</div>
 								
-								<div class="control-group">
+								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-1">英文描述</label>
 									<div class="controls">
-										<input type="text" name="enDescribe" class="span10" id="form-field-1" placeholder="英文描述"  style="vertical-align:top;width: 250px;">
+										<input type="textarea" name="enDescribe" class="span10" id="form-field-1" placeholder="英文描述"  style="vertical-align:top;width: 250px;">
 									</div>
-								</div>
+								</div> -->
 						
 								<div class="form-actions">
 									<button id='savebutton' class="btn btn-info" type="button"><i class="icon-ok"></i>保存</button>

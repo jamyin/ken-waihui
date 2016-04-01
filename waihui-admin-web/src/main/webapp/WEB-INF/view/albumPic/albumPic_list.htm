@@ -76,15 +76,12 @@
 												name="title" value="${(query.title)!}" placeholder="中文标题">
 												<i id="nav-search-icon" class="icon-search"></i>
 										</span></td>
-										<td style="vertical-align: top;"><select
-											class="chzn-select" name="menuType" id="menuType"
-											data-placeholder="菜单级别"
-											style="vertical-align: top; width: 100px;">
-												<option value="-1"></option> <#list menuTypes as type>
-												<option<#if (query.menuType?? &&
-													query.menuType?eval ==
-													type.getIndex())>selected="selected"</#if>
-													value="${type.getIndex()}">${type.getName()}</option> </#list>
+										<td style="vertical-align: top;">
+										<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align: top; width: 100px;">
+												<option value="-1"></option> 
+												<#list menuTypes as type>
+													<option <#if (query.menuType?? && query.menuType?eval == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
+												</#list>
 										</select></td>
 										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="teamId" id="teamId"
@@ -100,10 +97,14 @@
 											class="chzn-select" name="picStatus" id="picStatus"
 											data-placeholder="审核状态"
 											style="vertical-align: top; width: 120px;">
-												<option value="">审核状态</option>
+												<!-- <option value="">审核状态</option>
 												<option value="0">待审核</option>
 												<option value="1">审核通过</option>
-												<option value="2">审核不通过</option>
+												<option value="2">审核不通过</option> -->
+												<option value=""></option> 
+												<#list auditTypes as type>
+													<option <#if (query.picStatus?? && query.picStatus?eval == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
+												</#list>
 										</select></td>
 										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="picType" id="picType"
@@ -521,7 +522,7 @@
 				//iframe层-父子操作
 				layer.open({
 				    type: 2,
-				    area: ['750px', '600px'],
+				    area: ['900px', '600px'],
 				    title:'新增相片',
 				    fix: true, //不固定
 				    maxmin: false,

@@ -72,6 +72,7 @@ public class InformationController extends BaseController{
         ModelAndView mv = this.getModelAndView(this.getSessionUserId());
         try {
 			InformationDto info = infoService.getInformationById(id);
+			mv.addObject("menuTypes", MenuTypeEnums.getValus());
 			mv.addObject("info", info);
 			mv.addObject("parentTypes", InformationType.values());
 		    mv.addObject("subTypes", CookBookType.values());
