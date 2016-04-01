@@ -242,7 +242,6 @@
 			$("#savebutton").on('click',function(){
 				var note = UM.getEditor('editor').getContent();
 				$("#note").val(note);
-				alert(note);
 				//输入框校验
 				var title = $("[name=title]").val();
 				if (null == title || '' == title) {
