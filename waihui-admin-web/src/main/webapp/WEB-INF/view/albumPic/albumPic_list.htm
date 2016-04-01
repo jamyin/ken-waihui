@@ -146,6 +146,7 @@
 												type="checkbox" /><span class="lbl"></span></label></th>
 										<!-- <th>相片名称</th> -->
 										<th style="width: 100px;">缩略图</th>
+										<th style="width: 100px;">阴影图</th>
 										<!-- <th>所属相册</th> -->
 										<!-- <th>所属球队</th> -->
 										<!-- <th>照片类型</th> -->
@@ -172,7 +173,16 @@
 												<a href="${imgurl}${(page.pic)!}"> <img
 													src="${imgurl}${(page.pic)!}"
 													style="width: 50px; height: 50px"
-													title="所属相册:${(page.title)!}" />
+													title="标题:${(page.title)!}" />
+												</a>
+											</div>
+										</td>
+										<td>
+											<div class="gallery">
+												<a href="${imgurl}${(page.shadowPic)!}"> <img
+													src="${imgurl}${(page.shadowPic)!}"
+													style="width: 50px; height: 50px"
+													title="标题:${(page.title)!}" />
 												</a>
 											</div>
 										</td>
