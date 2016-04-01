@@ -37,16 +37,14 @@
 								<i id="nav-search-icon" class="icon-search"></i>
 							</span>
 						</td>
-					<!-- 	<td style="vertical-align: top;"><select
+						<td style="vertical-align: top;"><select
 											class="chzn-select" name="menuType" id="menuType"
 											data-placeholder="菜单级别"
 											style="vertical-align: top; width: 100px;">
-												<option value=""></option> <#list menuTypes as type>
-												<option<#if (params.menuType?? &&
-													params.menuType?eval ==
-													type.getIndex())>selected="selected"</#if>
+												<option value="-1"></option> <#list menuTypes as type>
+												<option<#if (params.menuType?? && params.menuType?eval == type.getIndex())>selected="selected"</#if>
 													value="${type.getIndex()}">${type.getName()}</option> </#list>
-						</select></td> -->
+						</select></td>
 						<!-- <td style="vertical-align:top;">
 							<select class="chzn-select" name="parentType" id="parentType" data-placeholder="请选择资讯类型">
 								<option value=""></option>
@@ -99,7 +97,7 @@
 									<td>${(page.title)!}</td>
 									<td>${(page.summary)!}</td>
 									<td><img style="width: 45px; height: 45px;" src="${imgurl}${(page.pic)!}"></td>
-									<td>
+									<!-- <td>
 										<#if parentTypes??>
 											<#list parentTypes as pt>
 												<#if pt.getIndex() == page.parentType>${(pt.getValue())!}</#if>
@@ -112,6 +110,11 @@
 												</#if>
 											</#if>
 										</#if>
+									</td> -->
+									<td>
+										<#list menuTypes as type>
+												<#if page.menuType?eval == type.getIndex()>${type.getName()}</#if>
+										</#list>
 									</td>
 									<td>${(page.createAdminName)!}</td>
 									<td  class='hidden-phone'>${(page.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
