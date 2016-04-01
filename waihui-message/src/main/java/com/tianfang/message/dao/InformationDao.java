@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.base.Objects;
 import com.tianfang.common.constants.DataStatus;
 import com.tianfang.common.model.PageQuery;
 import com.tianfang.common.mybatis.MyBatisBaseDao;
@@ -58,7 +59,7 @@ public class InformationDao extends MyBatisBaseDao<Information>{
         	if (StringUtils.isNotBlank(params.getId())){
         		criteria.andIdEqualTo(params.getId().trim());
         	}
-        	if (StringUtils.isNotBlank(params.getMenuType())){
+        	if (StringUtils.isNotBlank(params.getMenuType()) && !Objects.equal(params.getMenuType(), "-1")){
         		criteria.andMenuTypeEqualTo(params.getMenuType().trim());
         	}
         	if (StringUtils.isNotBlank(params.getTitle())){

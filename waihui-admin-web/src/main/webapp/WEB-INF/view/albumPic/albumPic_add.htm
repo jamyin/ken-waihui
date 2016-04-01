@@ -20,6 +20,7 @@
 							<!-- PAGE CONTENT BEGINS HERE -->
 							<form id="submitForm" class="form-horizontal" action="${base}/sport/newsInfo/saveNew.do" method="POST">
 								<input type="hidden" id="pics" name="pics" value=""/>
+								<input type="hidden" id="shadow_pic" name="shadowPic" value=""/>
 								<!-- <input type="hidden" id="described" name="described" value=""/>
 								<input type="hidden" id="enDescribed" name="enDescribed" value=""/> -->
 								<!-- <div class="control-group">
@@ -44,13 +45,33 @@
 								</div>
 								
 								<div class="control-group">
-									<label class="control-label" for="form-field-2">上传相片</label>
+									<label class="control-label" for="form-field-2">上传图片</label>
 									<div class="controls">
 										<input multiple type="file" id="id-input-file-3"/>
 									</div>
 									<div class="controls" id="img_contain">
 										<!-- <img id="img_show" alt="" src="" style="width:60px;height:60px;"/> -->
 									</div>	
+								</div>
+								
+								<!-- <div class="control-group">
+									<label class="control-label" for="form-field-2">上传阴影图片</label>
+									<div class="controls">
+										<input multiple type="file" id="id-input-file-2"/>
+									</div>
+									<div class="controls" id="img_shadow">
+										<img id="img_show" alt="" src="" style="width:60px;height:60px;"/>
+									</div>	
+								</div> -->
+								
+								<div class="control-group">
+									<label class="control-label" for="form-field-2">上传阴影图片</label>
+									<div class="controls">
+										<input multiple type="file" id="id-input-file-2"/>
+									</div>
+									<div class="controls">
+										<img id="img_show" alt="" src="" style="width:60px;height:60px;"/>
+									</div>									
 								</div>
 								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-1">相片排序</label>
@@ -69,7 +90,7 @@
 								<div class="control-group">	
 								<label class="control-label" for="form-field-2">菜单级别</label> 	
 									<div class="controls">	
-									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 250px;">
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
 												<option value="${type.getIndex()!}">${type.getName()}</option>
 											</#list>
@@ -104,18 +125,24 @@
 									</div>
 								</div> -->
 								<div class="control-group">
-									<label class="control-label" for="form-field-1">中文描述</label>
+									<label class="control-label" for="form-field-8">中文描述</label>
 									<div class="controls">
-										<input type="text" name="described" class="span10" id="form-field-1" placeholder="中文描述"  style="vertical-align:top;width: 250px;">
+										<textarea class="span10" name="described" id="described" placeholder="中文描述"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="form-field-8">英文描述</label>
+									<div class="controls">
+										<textarea class="span10" name="enDescribe" id="enDescribe" placeholder="英文描述"></textarea>
 									</div>
 								</div>
 								
-								<div class="control-group">
+								<!-- <div class="control-group">
 									<label class="control-label" for="form-field-1">英文描述</label>
 									<div class="controls">
-										<input type="text" name="enDescribe" class="span10" id="form-field-1" placeholder="英文描述"  style="vertical-align:top;width: 250px;">
+										<input type="textarea" name="enDescribe" class="span10" id="form-field-1" placeholder="英文描述"  style="vertical-align:top;width: 250px;">
 									</div>
-								</div>
+								</div> -->
 						
 								<div class="form-actions">
 									<button id='savebutton' class="btn btn-info" type="button"><i class="icon-ok"></i>保存</button>
@@ -195,7 +222,7 @@
 			}
 		});	
 			
-			$("#id-input-file").uploadify({
+			/* $("#id-input-file").uploadify({
 	            'uploader': '${base}/plugins/uploadify/uploadify.swf',
 	            'script':"${base}/file/upload.htm;jsessionid=${sessionId!}",
 	            'cancelImg': '${base}/plugins/uploadify/cancel.png',
@@ -228,7 +255,7 @@
 	    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
 	    			}); 
 	            }
-	        });			
+	        }); */			
 			
 			var urls = '';
 			var imgurl = '';
@@ -286,6 +313,52 @@
 	            }
 	        });	
 			
+			//上传阴影 图片
+			$("#id-input-file-2").uploadify({
+	            'uploader': '${base}/plugins/uploadify/uploadify.swf',
+	            'script':"${base}/file/upload.htm;jsessionid=${sessionId!}",
+	            'cancelImg': '${base}/plugins/uploadify/cancel.png',
+	            'queueID': 'fileQueue',
+	            'auto': true,
+	            //'multi':true,      只能上传单张
+	            'buttonText': 'select',
+	            'simUploadLimit' : 1,
+	            'sizeLimit':1024*1024*10,
+	            'queueSizeLimit' : 1,
+	            'fileDesc' : 'pictures',
+	            'fileExt': '*.gif;*.png;*.jpg',
+	            onComplete: function(event, queueID, fileObj, response, data) {
+	                var dataObj = eval("("+response+")");
+	                if(dataObj.status == 200){
+	                	parent.layer.msg('图片上传成功', {
+							shade: [0.9, '#000'],
+						    icon: 6,
+						    time: 800 //2秒关闭（如果不配置，默认是3秒）
+						}, function(){
+							$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
+							$("#shadow_pic").val(dataObj.filePath);
+						});                
+	               		//console.log(dataObj.filePath);
+						//$("[name=logo]").val(dataObj.filePath);
+	                }else{
+	                	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
+	        				shade: [0.9, '#000'],
+	        			    icon: 3,
+	        			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+	        			}); 
+	                }
+	            },
+	            onSelect:function(){
+	            },
+	            onError: function(event, queueID, fileObj) {
+	            	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
+	    				shade: [0.9, '#000'],
+	    			    icon: 3,
+	    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+	    			}); 
+	            }
+	        });
+			
 			$("#resetbutton").on('click',function(){
 				var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 				parent.layer.close(index);
@@ -336,7 +409,7 @@
 				});
 			});
 							
-			$('#id-input-file-1 , #id-input-file-2').ace_file_input({
+			/* $('#id-input-file-1 , #id-input-file-2').ace_file_input({
 				no_file:'No File ...',
 				btn_choose:'Choose',
 				btn_change:'Change',
@@ -347,7 +420,7 @@
 				//blacklist:'exe|php'
 				//onchange:''
 				//
-			});
+			}); */
 			
 		/* 	$('#id-input-file-3').ace_file_input({
 				style:'well',
