@@ -16,7 +16,6 @@
                 speed: 1000
             });
         });
-
     </script>
 </head>
 <body>
@@ -156,64 +155,56 @@
             </div>
             <a class="more" href="###"><span>更多</span></a>
         </div>
-
-
     </div>
-
-
 </div>
-
 
 <script>
     $(function () {
         //三角形对角高度
-        var _tHeight = $('.side5bg').height()
-        $('.triangle').css("border-bottom", _tHeight + "px #2b76ae solid")
+        var _tHeight = $('.side5bg').height();
+        $('.triangle').css("border-bottom", _tHeight + "px #2b76ae solid");
 
         //向左滚动
         $(".prebtn").on("click", function () {
-            var _index = $('.picker ul li.cur').index()
+            var _index = $('.picker ul li.cur').index();
             moveLeft(".picker ul", _index, 300);
         });
         //向右滚动
         $(".nxtbtn").on("click", function () {
-            var _index = $('.picker ul li.cur').index()
+            var _index = $('.picker ul li.cur').index();
             moveRight(".picker ul", _index, -300);
         });
-    })
+    });
 
     function moveLeft(selector, index, distance) {
-        var _move = parseInt($(selector).attr('move'))
-        var left = _move + distance
+        var _move = parseInt($(selector).attr('move'));
+        var left = _move + distance;
         if (_move >= 0) {
-            left = 0
+            left = 0;
         } else {
-            left = left
-            $(selector).find('li').eq(index - 1).addClass('cur').siblings().removeClass('cur')
+            left = left;
+            $(selector).find('li').eq(index - 1).addClass('cur').siblings().removeClass('cur');
         }
         $(selector).css({
             "left": left + "px"
-        }).attr('move', left)
-        $('.kind').html($(selector).find('li.cur img').attr('alt'))
+        }).attr('move', left);
+        $('.kind').html($(selector).find('li.cur img').attr('alt'));
     }
-    ;
-
     function moveRight(selector, index, distance) {
-        var _count = $(selector).find('li').length * 300 - 900
-        var _move = parseInt($(selector).attr('move'))
-        var left = _move + distance
+        var _count = $(selector).find('li').length * 300 - 900;
+        var _move = parseInt($(selector).attr('move'));
+        var left = _move + distance;
         if (_move <= -_count) {
             left = -_count
         } else {
-            left = left
-            $(selector).find('li').eq(index + 1).addClass('cur').siblings().removeClass('cur')
+            left = left;
+            $(selector).find('li').eq(index + 1).addClass('cur').siblings().removeClass('cur');
         }
         $(selector).css({
             "left": left + "px"
-        }).attr('move', left)
-        $('.kind').html($(selector).find('li.cur img').attr('alt'))
+        }).attr('move', left);
+        $('.kind').html($(selector).find('li.cur img').attr('alt'));
     }
-    ;
 </script>
 
 </body>
