@@ -1,0 +1,12 @@
+<nav class="nav">
+    <p>
+        <#if menuList??>
+            <#list menuList as menu>
+                <a href="${(menu.homeMenuDto.menuUrl)!}">${(menu.homeMenuDto.cname)!}</a>
+            </#list>
+        </#if>
+        <a class="wechat" href="###"><span><i></i></span></a>
+        <a class="sina" href="###"></a>
+        <a class="phone" href="###"><span><i></i>400-992-8219</span></a>
+    </p>
+</nav>
