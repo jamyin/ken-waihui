@@ -92,7 +92,7 @@
 									<div class="controls">	
 									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
-												<option value="${type.getId()!}">${type.getCname()}</option>
+												<option value="${type.getId()!}">${type.getCname()!}</option>
 											</#list>
 										</select>
 									</div>

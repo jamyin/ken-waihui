@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.admin.enums.AuditStatusEnums;
-import com.tianfang.admin.enums.MenuTypeEnums;
 import com.tianfang.admin.service.IHomeMenuService;
 import com.tianfang.admin.utils.PageData;
 import com.tianfang.business.dto.AlbumDto;
@@ -99,14 +98,14 @@ public class AlbumPicController extends BaseController{
 	 * 去修改页面页面
 	 */
 	@RequestMapping(value="/goAlbumPicEdit")
-	public ModelAndView goEdit(String albumId){
+	public ModelAndView goEdit(String id){
 		logger.info("去相片修改页面");
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
 		AlbumPictureDto dto = new AlbumPictureDto();
-		dto.setAlbumId(albumId);
+		dto.setId(id);
 		AlbumPictureDto result =iAlbumPicService.selectAlbumPic(dto);
-		List<AlbumDto> albumList =  iAlbumService.findAlbum(new AlbumDto());
-		mv.addObject("albumList", albumList);
+		List<HomeMenuDto> list = iHomeMenuService.findAll();
+		mv.addObject("menuTypes", list);
 		try {
 			mv.setViewName("/albumPic/albumPic_Edit");
 			mv.addObject("msg", "update");
