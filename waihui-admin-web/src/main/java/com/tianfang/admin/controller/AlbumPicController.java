@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.admin.enums.AuditStatusEnums;
 import com.tianfang.admin.enums.MenuTypeEnums;
+import com.tianfang.admin.service.IHomeMenuService;
 import com.tianfang.admin.utils.PageData;
 import com.tianfang.business.dto.AlbumDto;
 import com.tianfang.business.dto.AlbumPictureDto;
@@ -43,6 +45,9 @@ public class AlbumPicController extends BaseController{
 	@Autowired
 	private IAlbumService iAlbumService;
 	
+	@Autowired
+	private IHomeMenuService iHomeMenuService;
+	
 	/**
 	 * 去新增页面页面
 	 */
@@ -52,7 +57,8 @@ public class AlbumPicController extends BaseController{
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
 		/*List<AlbumDto> albumList =  iAlbumService.findAlbum(new AlbumDto());
 		mv.addObject("albumList", albumList);*/
-		mv.addObject("menuTypes", MenuTypeEnums.getValus());
+		List<HomeMenuDto> list = iHomeMenuService.findAll();
+		mv.addObject("menuTypes", list);
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
@@ -179,8 +185,9 @@ public class AlbumPicController extends BaseController{
 		PageResult<AlbumPictureDto> result = iAlbumPicService.findAlbumPicPage(query,
 				page.changeToPageQuery());
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
+		List<HomeMenuDto> list = iHomeMenuService.findAll();
+		mv.addObject("menuTypes", list);
 		List<AlbumDto> albumList = iAlbumService.findAlbum(new AlbumDto());
-		mv.addObject("menuTypes", MenuTypeEnums.getValus());
 		mv.addObject("auditTypes", AuditStatusEnums.getValus());
 		mv.addObject("allAlbum", albumList);
 		mv.addObject("pageList", result);

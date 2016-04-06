@@ -17,7 +17,7 @@
 		<!-- left menu  start -->
 
 		<#include "../common/left.htm"/>
-
+         
 		<!-- left menu  end -->
 		<div id="main-content" class="clearfix">
 			<div id="breadcrumbs">
@@ -77,12 +77,13 @@
 												<i id="nav-search-icon" class="icon-search"></i>
 										</span></td>
 										<td style="vertical-align: top;">
-										<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align: top; width: 100px;">
-												<option value="-1"></option> 
-												<#list menuTypes as type>
-													<option <#if (query.menuType?? && query.menuType?eval == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
-												</#list>
-										</select></td>
+											<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单类型" style="vertical-align: top; width: 100px;">
+													<option value="-1"></option> 
+													<#list menuTypes as type>
+														<option <#if (query.menuType?? && query.menuType! == type.getId())>selected="selected"</#if> value="${type.getId()}">${type.getCname()}</option>
+													</#list>
+											</select>
+										</td>
 										<!-- <td style="vertical-align: top;"><select
 											class="chzn-select" name="teamId" id="teamId"
 											data-placeholder="所属球队"
@@ -197,10 +198,14 @@
 											<#else> <span class='label label-warning'>无</span> </#if>
 										</td> -->
 										<!-- <td class='hidden-phone'>${(page.publisher)!}</td> -->
-										<td class='hidden-phone'><#if page.menuType??> <#list
-											menuTypes as type> <#if page.menuType?eval ==
-											type.getIndex()>${type.getName()}</#if> </#list> <#else> <span
-											class='label label-warning'>未加入菜单</span> </#if>
+										<td class='hidden-phone'>
+										<#if page.menuType??> 
+										<#list menuTypes as type> 
+											<#if page.menuType == type.getId()>${type.getCname()}</#if> 
+										</#list> 
+										<#else> 
+											<span class='label label-warning'>未加入菜单</span> 
+										</#if>
 										</td>
 										<td class='hidden-phone'>${(page.title)!}</td>
 										<td class='hidden-phone'>${(page.enTitle)!}</td>
