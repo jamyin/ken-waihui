@@ -2,9 +2,6 @@ package com.tianfang.dto;
 
 import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.business.dto.AlbumPictureDto;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.List;
 
