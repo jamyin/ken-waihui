@@ -2,7 +2,7 @@
     <p>
         <#if menuList??>
             <#list menuList as menu>
-                <a href="${(menu.homeMenuDto.menuUrl)!}">${(menu.homeMenuDto.cname)!}</a>
+                <a href="${(menu.homeMenuDto.menuUrl)!}?mId=${(menu.homeMenuDto.id)!}">${(menu.homeMenuDto.cname)!}</a>
             </#list>
         </#if>
         <a class="wechat" href="###"><span><i></i></span></a>
