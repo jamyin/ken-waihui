@@ -41,7 +41,7 @@
 							<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单类型" style="vertical-align: top; width: 100px;">
 									<option value="-1"></option> 
 									<#list menuTypes as type>
-										<option <#if (pageList.menuType?? && pageList.menuType! == type.getId())>selected="selected"</#if> value="${type.getId()}">${type.getCname()}</option>
+										<option <#if (params.menuType?? && params.menuType! == type.getId())>selected="selected"</#if> value="${type.getId()}">${type.getCname()}</option>
 									</#list>
 							</select>
 						</td>
