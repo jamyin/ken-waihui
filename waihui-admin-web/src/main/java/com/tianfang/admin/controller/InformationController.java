@@ -1,5 +1,7 @@
 package com.tianfang.admin.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tianfang.admin.dto.AdminDto;
-import com.tianfang.admin.enums.MenuTypeEnums;
+import com.tianfang.admin.dto.HomeMenuDto;
+import com.tianfang.admin.service.IHomeMenuService;
 import com.tianfang.common.constants.DataStatus;
 import com.tianfang.common.ext.ExtPageQuery;
 import com.tianfang.common.model.PageResult;
@@ -24,15 +27,20 @@ import com.tianfang.message.service.IInformationService;
 @RequestMapping(value = "info")
 public class InformationController extends BaseController{
 	protected static final Log logger = LogFactory.getLog(InformationController.class);
+	
 	@Autowired
 	private IInformationService infoService;
+	
+	@Autowired
+	private IHomeMenuService iHomeMenuService;
 	
 	@RequestMapping(value = "list")
 	public ModelAndView list(InformationDto dto, ExtPageQuery page){
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
         PageResult<InformationDto> result = infoService.findInformationByParam(dto, page.changeToPageQuery());
         mv.setViewName("/info/list");
-        mv.addObject("menuTypes", MenuTypeEnums.getValus());
+        List<HomeMenuDto> list = iHomeMenuService.findAll();
+		mv.addObject("menuTypes", list);
         mv.addObject("pageList", result);
         mv.addObject("parentTypes", InformationType.values());
         mv.addObject("subTypes", CookBookType.values());
@@ -43,7 +51,8 @@ public class InformationController extends BaseController{
 	@RequestMapping(value = "add")
 	public ModelAndView add(){
 		ModelAndView mv = this.getModelAndView(this.getSessionUserId());
-		mv.addObject("menuTypes", MenuTypeEnums.getValus());
+		List<HomeMenuDto> list = iHomeMenuService.findAll();
+		mv.addObject("menuTypes", list);
 		mv.addObject("parentTypes", InformationType.values());
 	    mv.addObject("subTypes", CookBookType.values());
         mv.setViewName("/info/add");
@@ -72,7 +81,8 @@ public class InformationController extends BaseController{
         ModelAndView mv = this.getModelAndView(this.getSessionUserId());
         try {
 			InformationDto info = infoService.getInformationById(id);
-			mv.addObject("menuTypes", MenuTypeEnums.getValus());
+			List<HomeMenuDto> list = iHomeMenuService.findAll();
+			mv.addObject("menuTypes", list);
 			mv.addObject("info", info);
 			mv.addObject("parentTypes", InformationType.values());
 		    mv.addObject("subTypes", CookBookType.values());
