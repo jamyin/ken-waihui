@@ -160,6 +160,13 @@
 
 <script>
     $(function () {
+        //菜单变化
+        $('.mu').hover(function(){
+            $(this).html($(this).attr('e_data'))
+        },function(){
+            $(this).html($(this).attr('c_data'))
+        });
+
         //三角形对角高度
         var _tHeight = $('.side5bg').height();
         $('.triangle').css("border-bottom", _tHeight + "px #2b76ae solid");

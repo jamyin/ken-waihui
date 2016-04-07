@@ -93,26 +93,35 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 	public List<AlbumPicture> findTeamAlbumPic(AlbumPictureDto albumPictureDto) {
 		AlbumPictureExample example = new AlbumPictureExample();
 		Criteria criteria = example.createCriteria();
-		if(!StringUtils.isEmpty(albumPictureDto.getTeamId())){
-			criteria.andTeamIdEqualTo(albumPictureDto.getTeamId());	
-		}
-
-		if(!StringUtils.isEmpty(albumPictureDto.getAlbumId())){
-			criteria.andAlbumIdEqualTo(albumPictureDto.getAlbumId());	
-		}
-		
-		if(albumPictureDto.getPicType()!=null){
-			criteria.andPicTypeEqualTo(albumPictureDto.getPicType());
-		}
-		if(albumPictureDto.getPicStatus()!=null){
-			criteria.andPicStatusEqualTo(albumPictureDto.getPicStatus());
-		}
-
-		criteria.andStatEqualTo(DataStatus.ENABLED);
+		assemblyParams(albumPictureDto, criteria);
 		if(!Objects.equal(albumPictureDto.getLimit(),null)){
 			example.setOrderByClause("create_time desc limit " + albumPictureDto.getLimit());
 		}
 		return mapper.selectByExample(example);
+	}
+
+	private void assemblyParams(AlbumPictureDto albumPictureDto, Criteria criteria) {
+		if (null != albumPictureDto){
+			if(!StringUtils.isEmpty(albumPictureDto.getTeamId())){
+				criteria.andTeamIdEqualTo(albumPictureDto.getTeamId());
+			}
+
+			if(!StringUtils.isEmpty(albumPictureDto.getAlbumId())){
+				criteria.andAlbumIdEqualTo(albumPictureDto.getAlbumId());
+			}
+			if (StringUtils.isNotBlank(albumPictureDto.getMenuType())){
+				criteria.andMenuTypeEqualTo(albumPictureDto.getMenuType());
+			}
+
+			if(albumPictureDto.getPicType()!=null){
+				criteria.andPicTypeEqualTo(albumPictureDto.getPicType());
+			}
+			if(albumPictureDto.getPicStatus()!=null){
+				criteria.andPicStatusEqualTo(albumPictureDto.getPicStatus());
+			}
+		}
+
+		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 
 	public List<AlbumPicture> findAlbumPicPage(AlbumPicture albumPic,
