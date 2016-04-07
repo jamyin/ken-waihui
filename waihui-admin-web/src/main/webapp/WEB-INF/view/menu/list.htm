@@ -57,9 +57,16 @@
 										</#list>
 								</select></td>
 								<td style="vertical-align: top;">
-									<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单级" style="vertical-align: top; width: 79px;">
+									<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align: top; width: 90px;">
 										<option value="-1"></option>
 										<#list menuTypes as type>
+											<option <#if (params.menuType?? && params.menuType?eval == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
+										</#list>
+								</select></td>
+								<td style="vertical-align: top;">
+									<select class="chzn-select" name="issingle" id="issingle" data-placeholder="显示类型" style="vertical-align: top; width: 90px;">
+										<option value="-1"></option>
+										<#list showTypes as type>
 											<option <#if (params.menuType?? && params.menuType?eval == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
 										</#list>
 								</select></td>
@@ -79,9 +86,10 @@
 							</th>
 							<th>中文名</th>
 							<th>英文名</th>
-							<th>菜单级</th>
-							<th>页面模板</th>
-							<th>视频类型</th>
+							<th>菜单级别</th>
+							<th>显示类型</th>
+							<!-- <th>页面模板</th>
+							<th>视频类型</th> -->
 							<th>菜单链接</th>
 							<th>发布时间</th>
 							<th style="width: 75px;">菜单排序</th>
@@ -104,6 +112,11 @@
 										</#list>
 									</td>
 									<td>
+										<#list showTypes as type>
+												<#if page.issingle?eval == type.getIndex()>${type.getName()}</#if>
+										</#list>
+									</td>
+									<!-- <td>
 										<#if page.activityType??>
 											<#list acTypes as type>
 													<#if page.activityType == type.getIndex()>${type.getName()}</#if>
@@ -120,7 +133,7 @@
 										<#else>
 											无
 										</#if>
-									</td>
+									</td> -->
 									<td>${(page.menuUrl)!}</td>
 									<td>${(page.createTime?string("yyyy-MM-dd"))!}</td>
 									<td><input type="text" class="up_order span8" value="${(page.menuOrder)!}" obj-id="${(page.id)!}" old-order="${(page.menuOrder)!}" /></td>

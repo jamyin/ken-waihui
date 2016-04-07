@@ -67,11 +67,11 @@
 									</div>								
 								</div> -->
 								<div class="control-group">	
-								<label class="control-label" for="form-field-2">菜单级别</label> 	
+								<label class="control-label" for="form-field-2">菜单类型</label> 	
 									<div class="controls">	
-									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单类型" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
-												<option value="${type.getIndex()!}">${type.getName()}</option>
+												<option value="${type.getId()!}">${type.getCname()!}</option>
 											</#list>
 										</select>
 									</div>

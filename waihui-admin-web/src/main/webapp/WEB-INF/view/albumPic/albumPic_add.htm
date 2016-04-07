@@ -69,8 +69,8 @@
 									<div class="controls">
 										<input multiple type="file" id="id-input-file-2"/>
 									</div>
-									<div class="controls">
-										<img id="img_show" alt="" src="" style="width:60px;height:60px;"/>
+									<div class="controls" id="img_show">
+										<!-- <img id="img_show" alt="" src="" style="width:60px;height:60px;"/> -->
 									</div>									
 								</div>
 								<!-- <div class="control-group">
@@ -90,7 +90,7 @@
 								<div class="control-group">	
 								<label class="control-label" for="form-field-2">菜单类型</label> 	
 									<div class="controls">	
-									 	<select  name="menuType" id="menuType" data-placeholder="菜单级别" style="vertical-align:top;width: 100px;">
+									 	<select  name="menuType" id="menuType" data-placeholder="菜单类型" style="vertical-align:top;width: 100px;">
 											<#list menuTypes as type>
 												<option value="${type.getId()!}">${type.getCname()!}</option>
 											</#list>
@@ -335,7 +335,8 @@
 						    icon: 6,
 						    time: 800 //2秒关闭（如果不配置，默认是3秒）
 						}, function(){
-							$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
+							//$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
+							$("#img_show").append("<img src='${imgurl}" + dataObj.filePath + "' style='width:60px;height:60px;'/>");
 							$("#shadow_pic").val(dataObj.filePath);
 						});                
 	               		//console.log(dataObj.filePath);

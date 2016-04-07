@@ -37,15 +37,14 @@
 								<i id="nav-search-icon" class="icon-search"></i>
 							</span>
 						</td>
-						<td style="vertical-align: top;"><select
-											class="chzn-select" name="menuType" id="menuType"
-											data-placeholder="菜单级别"
-											style="vertical-align: top; width: 100px;">
-												<option value="-1"></option> 
-												<#list menuTypes as type> <option <#if (params.menuType?? && params.menuType?eval == type.getIndex())>selected="selected"</#if>
-													value="${type.getIndex()}">${type.getName()}</option> 
-												</#list>
-						</select></td>
+						<td style="vertical-align: top;">
+							<select class="chzn-select" name="menuType" id="menuType" data-placeholder="菜单类型" style="vertical-align: top; width: 100px;">
+									<option value="-1"></option> 
+									<#list menuTypes as type>
+										<option <#if (params.menuType?? && params.menuType! == type.getId())>selected="selected"</#if> value="${type.getId()}">${type.getCname()}</option>
+									</#list>
+							</select>
+						</td>
 						<!-- <td style="vertical-align:top;">
 							<select class="chzn-select" name="parentType" id="parentType" data-placeholder="请选择资讯类型">
 								<option value=""></option>
@@ -81,7 +80,7 @@
 							<th style="width:25%;">简介</th>
 							<th>缩略图</th>
 							<!-- <th>资讯类型</th> -->
-							<th>菜单级别</th>
+							<th>菜单类型</th>
 							<th>创建者</th>
 							<th class="hidden-phone"><i class="icon-time hidden-phone"></i>创建时间</th>
 							<th style="width:8%;">操作</th>
@@ -112,10 +111,14 @@
 											</#if>
 										</#if>
 									</td> -->
-									<td>
-										<#list menuTypes as type>
-												<#if page.menuType?eval == type.getIndex()>${type.getName()}</#if>
-										</#list>
+									<td class='hidden-phone'>
+										<#if page.menuType??> 
+											<#list menuTypes as type> 
+												<#if page.menuType == type.getId()>${type.getCname()}</#if> 
+											</#list> 
+										<#else> 
+											<span class='label label-warning'>未加入菜单</span> 
+										</#if>
 									</td>
 									<td>${(page.createAdminName)!}</td>
 									<td  class='hidden-phone'>${(page.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
