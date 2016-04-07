@@ -54,7 +54,7 @@
 										</select>
 								</div>	
 								
-								<div class="control-group">
+								<!-- <div class="control-group">
 									<label class="course_add_label" for="form-field-1">页面模板</label>
 										<select  name="activityType" id="activityType" data-placeholder="页面模板" style="vertical-align:top;margin-left:20px;">
 											<#list acTypes as type>
@@ -70,9 +70,9 @@
 												<option value="${type.getIndex()!}">${type.getName()}</option>
 											</#list>
 										</select>
-								</div>			
+								</div>		 -->	
 										
-								<div class="control-group" style="margin-left:-90px;">
+								<!-- <div class="control-group" style="margin-left:-90px;">
 									<label class="control-label" for="form-input-readonly">是否单页</label>
 										<div class="controls" id="form-radio-show">
 											<label class="span2">
@@ -82,8 +82,16 @@
 												<input name="form-field-radio" type="radio" value="0"/><span class="lbl">否</span>
 											</label>
 										</div>
-								</div>	
+								</div>	 -->
 								
+								<div class="control-group">
+								<label class="course_add_label" for="form-field-1">显示类型</label>
+									<select  name="menuType" id="menuType" data-placeholder="显示类型" style="vertical-align:top;margin-left:20px;">
+										<#list showTypes as type>
+											<option value="${type.getIndex()!}">${type.getName()}</option>
+										</#list>
+									</select>
+								</div>	
 								<div class="control-group">
 									<label class="course_add_label" for="form-field-2">图片</label>
 									<div class="course_add_input">
@@ -229,7 +237,6 @@
 		}
 		
 		$(function() {
-			
 			$("#id-input-file-3").uploadify({
 	            'uploader': '${base}/plugins/uploadify/uploadify.swf',
 	            'script':"${base}/file/upload.htm",

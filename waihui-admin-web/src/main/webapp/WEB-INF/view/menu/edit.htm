@@ -66,7 +66,7 @@
 										</select>
 								</div>	
 								
-								<div class="control-group">
+						<!-- 		<div class="control-group">
 									<label class="course_add_label" for="form-field-1">页面模板</label>
 										<select  name="activityType" id="activityType" data-placeholder="页面模板" style="vertical-align:top;margin-left:20px;">
 											<#list acTypes as type>
@@ -82,9 +82,9 @@
 												<option <#if (data.videoType!-1) == type.getIndex()> selected="selected"</#if> value="${type.getIndex()!}">${type.getName()}</option>
 											</#list>
 										</select>
-								</div>			
+								</div>	 -->		
 										
-								<div class="control-group" style="margin-left:-90px;">
+								<!-- <div class="control-group" style="margin-left:-90px;">
 									<label class="control-label" for="form-input-readonly">是否单页</label>
 										<div class="controls" id="form-radio-show">
 										<#if data.issingle??>
@@ -106,8 +106,16 @@
 											</#if>
 										</#if>
 										</div>
-								</div>	
-								
+								</div> -->	
+								<div class="control-group">	
+								<label class="course_add_label" for="form-field-1">显示类型</label> 	
+									 	<select  name="issingle" id="issingle" data-placeholder="显示类型"  style="vertical-align:top;margin-left:20px;">
+											<!-- <option value="-1"></option>  -->
+											<#list showTypes as type>
+												<option <#if (data.issingle?? && data.issingle! == type.getIndex())>selected="selected"</#if> value="${type.getIndex()}">${type.getName()}</option>
+											</#list>
+										</select>
+								</div>
 								<div class="control-group">
 									<label class="course_add_label" for="form-field-2">图片</label>
 									<div class="course_add_input">
