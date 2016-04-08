@@ -5,6 +5,7 @@ import com.tianfang.business.dto.AlbumPictureDto;
 import com.tianfang.business.service.IAlbumPicService;
 import com.tianfang.common.model.PageQuery;
 import com.tianfang.common.model.PageResult;
+import com.tianfang.common.util.StringUtils;
 import com.tianfang.enums.HomeMenuEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,7 +46,7 @@ public class IndexController extends BaseController{
      * @version 1.0
      */
     @RequestMapping(value = "index")
-    public ModelAndView index(){
+    public ModelAndView index(String mId){
         ModelAndView mv = getModelAndView();
         List<MenuDto> menus = getCacheHomeMenu();
 
@@ -62,6 +63,10 @@ public class IndexController extends BaseController{
         // 6.联系我们
         getContactUs(getMenu(menus, HomeMenuEnum.CONTACT), mv);
 
+        if (StringUtils.isBlank(mId)){
+            mId = (menus.get(0)).getHomeMenuDto().getId();
+        }
+        mv.addObject("menuId", mId);
         mv.setViewName("/index");
         return mv;
     }

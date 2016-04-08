@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="fsvs demo">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/gif" href="/img/favicon.ico">
+    <title>聚聚外烩</title>
+	<script src="/js/jquery-2.1.3.min.js"></script>
+    <link href="/css/index.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="wrapper">
+		<#include "/common/nav.htm"/>
+		
+		<div class="page_title3"></div>
+		<div class="contactus_box">
+			${(contactus.content)!}
+		</div>
+
+		<#if subMenu??>
+			<#list subMenu as sub>
+				<div class="contactus_box service">
+					${(sub.content)!}
+				</div>
+			</#list>
+		</#if>
+
+		<#include "/common/foot.htm"/>
+	</div>
+
+    <script>
+	$(function(){
+		// 根据id选中菜单
+		$('.mu').each(function(){
+			if ($(this).attr("menuId") == "${(menuId)!}"){
+				$(this).addClass("cur");
+				return;
+			}
+		});
+
+		//菜单变化
+		$('.mu').hover(function(){
+			$(this).html($(this).attr('e_data'))
+		},function(){
+			$(this).html($(this).attr('c_data'))
+		});
+	})
+    </script>
+
+</body>
+</html>

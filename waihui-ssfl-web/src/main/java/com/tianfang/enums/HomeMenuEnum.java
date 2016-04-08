@@ -15,8 +15,7 @@ public enum HomeMenuEnum {
     COMPANY("2b106446-321a-4301-9297-e294cd01061c"), // 公司资质
     ACITIVITY("502e343b-c4bc-4522-af54-2c0088c8b6ae"), // 活动案例
     AREA("d493bf67-c8fc-4dfa-9835-3f4d443e5abe"),      // 场地推荐
-    CONTACT("aad34553-9009-4242-9672-35f3b45ebd8a"),   // 联系我们
-    PARTYTYPE("29ab349b-337d-4cdb-8a26-339d250708ad");  // 宴会类型
+    CONTACT("aad34553-9009-4242-9672-35f3b45ebd8a");   // 联系我们
 
     private String id;
 
