@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="fsvs demo">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/gif" href="/img/favicon.ico">
+    <title>聚聚外烩</title>
+	<script src="/js/jquery-2.1.3.min.js"></script>
+    <link href="/css/index.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="wrapper">
+		<#include "/common/nav.htm"/>
+		<div class="page_title4"></div>
+		<#if subMenu??>
+			<#list subMenu as sub>
+				<#if sub_index == 0>
+					<div class="company_box">
+				</#if>
+				<#if sub_index == 1>
+					<div class="company_box factory">
+				</#if>
+				<#if sub_index == 2>
+					<div class="company_box qualifications">
+				</#if>
+				<#if sub_index == 3>
+					<div class="company_box certification">
+				</#if>
+					<div class="subtitle">${(sub.cname)!}<span class="curfont">${(sub.ename)!}</span></div>
+					${(sub.content)!}
+				</div>
+			</#list>
+		</#if>
+
+		<#include "/common/foot.htm"/>
+	</div>
+			
+			
+			
+			
+    <script>
+	$(function(){
+		//菜单变化
+		$('.mu').hover(function(){
+			$(this).html($(this).attr('e_data'))
+		},function(){
+			$(this).html($(this).attr('c_data'))
+		});
+	})
+    </script>
+
+</body>
+</html>

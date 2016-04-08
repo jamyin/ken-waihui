@@ -2,7 +2,7 @@
     <p>
         <#if menuList??>
             <#list menuList as menu>
-                <a class="mu <#if menu_index == 0>cur</#if>" e_data="${(menu.homeMenuDto.ename)!}" c_data="${(menu.homeMenuDto.cname)!}" href="${(menu.homeMenuDto.menuUrl)!}?mId=${(menu.homeMenuDto.id)!}">${(menu.homeMenuDto.cname)!}</a>
+                <a class="mu" menuId="${(menu.homeMenuDto.id)!}" e_data="${(menu.homeMenuDto.ename)!}" c_data="${(menu.homeMenuDto.cname)!}" href="${(menu.homeMenuDto.menuUrl)!}?mId=${(menu.homeMenuDto.id)!}">${(menu.homeMenuDto.cname)!}</a>
             </#list>
         </#if>
         <a class="wechat" href="###"><span><i></i></span></a>

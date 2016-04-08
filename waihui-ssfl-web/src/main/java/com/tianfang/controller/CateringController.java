@@ -34,7 +34,7 @@ public class CateringController extends BaseController{
 	 * @version 1.0
 	 */
     @RequestMapping(value = "index")
-    public ModelAndView index(){
+    public ModelAndView index(String mId){
         ModelAndView mv = getModelAndView();
         HomeMenuDto service = homeMenuService.findById(HomeMenuEnum.SERVER.getId());
         List<HomeMenuDto> subs = homeMenuService.findByParentId(HomeMenuEnum.SERVER.getId());
@@ -51,7 +51,7 @@ public class CateringController extends BaseController{
 
             mv.addObject("subMenus", subMenus);
         }
-        
+        mv.addObject("menuId", mId);
         mv.addObject("service", service);
         mv.setViewName("/catering/index");
         return mv;

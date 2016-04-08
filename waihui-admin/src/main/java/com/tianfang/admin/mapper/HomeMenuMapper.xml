@@ -148,6 +148,8 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from sst_home_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
