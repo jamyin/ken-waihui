@@ -9,34 +9,36 @@
 </head>
 <body>
 	<div class="wrapper">
-		<nav class="nav">
-			<#include "/common/nav.htm"/>
-		</nav>
-		
+		<#include "/common/nav.htm"/>
+
 		<div class="page_title1"></div>
 		<div class="catering_box">
-			<div class="subtitle">${(service.cname)!}<span class="curfont">${(service.ename)!}</span></div>
-			<p>${(service.content)!}</p>
+			${(service.content)!}
 		</div>
-		
-		<div class="party_style">
-			<div class="subtitle">${(partyType.cname)!}<span class="curfont">${(partyType.ename)!}</span></div>
-			<ul>
-				<#if pics??>
-					<#list pics as pic>
-						<li>
-							<img src="${(wwwdomain)!}${(pic.pic)!}" border="0">
-							<div class="cont"><h2>${(pic.title)!}</h2><br>
-								<h3 class="curfont">${(pic.enTitle)!}</h3><br>
-								<span>${(pic.described)!}</span><br>
-								<span class="curfont">${(pic.enDescribed)!}</span>
-							</div>
-						</li>
-					</#list>
-				</#if>
-			</ul>
-		</div>
-		<div class="footer">Copyright2015©JUJUparty Corporation,All Rights Reserved Collect form-More Templates<br>上海趴体外烩餐饮管理有限公司沪ICP备13028085号-1</div>
+
+		<#if subMenus??>
+			<#list subMenus as sub>
+				<div class="party_style">
+					<div class="subtitle">宴会类型<span class="curfont">The Party Type</span></div>
+					<ul>
+						<#if sub.pics??>
+							<#list sub.pics as pic>
+								<li>
+									<img src="${(wwwdomain)!}${(pic.pic)!}" border="0">
+									<div class="cont"><h2>${(pic.title)!}</h2><br>
+										<h3 class="curfont">${(pic.enTitle)!}</h3><br>
+										<span>${(pic.described)!}</span><br>
+										<span class="curfont">${(pic.enDescribed)!}</span>
+									</div>
+								</li>
+							</#list>
+						</#if>
+					</ul>
+				</div>
+			</#list>
+		</#if>
+
+		<#include "/common/foot.htm"/>
 	</div>
 			
 			
@@ -44,6 +46,14 @@
 			
     <script>
 	$(function(){
+		// 根据id选中菜单
+		$('.mu').each(function(){
+			if ($(this).attr("menuId") == "${(menuId)!}"){
+				$(this).addClass("cur");
+				return;
+			}
+		});
+
 		//菜单变化
 		$('.mu').hover(function(){
 			$(this).html($(this).attr('e_data'))

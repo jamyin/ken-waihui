@@ -134,7 +134,7 @@
         </div>
 
         <div class="side_box side6bg">
-            <div class="side6_right"><img src="img/side6_title.jpg" border="0"></div>
+            <div class="side6_right"><img src="/img/side6_title.jpg" border="0"></div>
             <div class="side6_title_f">
                 ${(activity.summary)!}
             </div>
@@ -160,6 +160,14 @@
 
 <script>
     $(function () {
+        // 根据id选中菜单
+        $('.mu').each(function(){
+            if ($(this).attr("menuId") == "${(menuId)!}"){
+                $(this).addClass("cur");
+                return;
+            }
+        });
+
         //菜单变化
         $('.mu').hover(function(){
             $(this).html($(this).attr('e_data'))
