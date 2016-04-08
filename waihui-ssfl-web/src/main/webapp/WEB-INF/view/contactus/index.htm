@@ -11,29 +11,22 @@
 	<div class="wrapper">
 		<#include "/common/nav.htm"/>
 		
-		<div class="page_title2"></div>
-		<div class="venue_box">
-			${(venue.content)!}
+		<div class="page_title3"></div>
+		<div class="contactus_box">
+			${(contactus.content)!}
 		</div>
-		
-		<div class="venuephoto">
-			<div class="subtitle">场地照片<span class="curfont">Venue Photo</span></div>
-			<ul>
-				<#if pics??>
-					<#list	pics as pic>
-						<li>
-							<img src="${(wwwdomain)!}${(pic.pic)!}" border="0">
-							<div class="cont"><h2>${(pic.title)!}</h2><br>
-								<h3 class="curfont">${(pic.enTitle)!}</h3>
-							</div>
-						</li>
-					</#list>
-				</#if>
-			</ul>
-		</div>
+
+		<#if subMenu??>
+			<#list subMenu as sub>
+				<div class="contactus_box service">
+					${(sub.content)!}
+				</div>
+			</#list>
+		</#if>
+
 		<#include "/common/foot.htm"/>
 	</div>
-			
+
     <script>
 	$(function(){
 		// 根据id选中菜单

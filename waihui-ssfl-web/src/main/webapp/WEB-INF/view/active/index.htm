@@ -12,7 +12,6 @@
 		<#include "/common/nav.htm"/>
 		<div class="page_title5"></div>
 		<div class="active_box">
-			<div class="subtitle">${(active.cname)!}<span class="curfont">${(active.ename)!}</span></div>
 			${(active.content)!}
 		</div>
 
@@ -21,8 +20,6 @@
 				<ul>
 					<#list subMenu as sub>
 						<li>
-							<h3>${(sub.cname)!}</h3>
-							<h4 class="curfont">${(sub.ename)!}</h4>
 							${(sub.content)!}
 						</li>
 					</#list>

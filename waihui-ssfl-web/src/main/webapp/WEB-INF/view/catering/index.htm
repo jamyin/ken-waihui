@@ -13,14 +13,13 @@
 
 		<div class="page_title1"></div>
 		<div class="catering_box">
-			<div class="subtitle">${(service.cname)!}<span class="curfont">${(service.ename)!}</span></div>
-			<p>${(service.content)!}</p>
+			${(service.content)!}
 		</div>
 
 		<#if subMenus??>
 			<#list subMenus as sub>
 				<div class="party_style">
-					<div class="subtitle">${(sub.menu.cname)!}<span class="curfont">${(sub.menu.ename)!}</span></div>
+					<div class="subtitle">宴会类型<span class="curfont">The Party Type</span></div>
 					<ul>
 						<#if sub.pics??>
 							<#list sub.pics as pic>
