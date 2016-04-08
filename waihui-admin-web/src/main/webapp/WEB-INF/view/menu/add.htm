@@ -19,7 +19,7 @@
 						<div class="row-fluid">
 							<!-- PAGE CONTENT BEGINS HERE -->
 							<form id="submitForm" class="form-horizontal" action="${base}/menu/save.do" method="POST">
-								<input type="hidden" id="issingle" name="issingle" value="1"/>
+								<!-- <input type="hidden" id="issingle" name="issingle" value="1"/> -->
 								<input type="hidden" id="content" name="content" value=""/>
 								<input type="hidden" id="picture" name="picture" value=""/>
 								<div class="control-group">
@@ -86,7 +86,7 @@
 								
 								<div class="control-group">
 								<label class="course_add_label" for="form-field-1">显示类型</label>
-									<select  name="menuType" id="menuType" data-placeholder="显示类型" style="vertical-align:top;margin-left:20px;">
+									<select  name="issingle" id="issingle" data-placeholder="显示类型" style="vertical-align:top;margin-left:20px;">
 										<#list showTypes as type>
 											<option value="${type.getIndex()!}">${type.getName()}</option>
 										</#list>
