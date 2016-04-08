@@ -1,12 +1,12 @@
 package com.tianfang.controller;
 
+import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.admin.dto.MenuDto;
 import com.tianfang.business.dto.AlbumPictureDto;
 import com.tianfang.business.service.IAlbumPicService;
 import com.tianfang.common.model.PageQuery;
 import com.tianfang.common.model.PageResult;
 import com.tianfang.common.util.StringUtils;
-import com.tianfang.enums.HomeMenuEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +31,12 @@ public class IndexController extends BaseController{
     protected static final Log logger = LogFactory.getLog(IndexController.class);
     private final static int SERVER_NUM = 5;    // 外烩服务展示图片条数
     private final static int BOOK_NUM = 3;      // 精选菜单展示图片条数
+    private final static int SERVER_INDEX = 2;  // 外烩服务下标
+    private final static int MENU_INDEX = 1;    // 精品菜单下标
+    private final static int COMPANY_INDEX = 3; // 公司资质下标
+    private final static int ACTIVE_INDEX = 4;  // 活动案例下标
+    private final static int CONTACT_INDEX = 6; // 联系我们下标
+
 
     @Autowired
     private IAlbumPicService picService;
@@ -53,18 +58,21 @@ public class IndexController extends BaseController{
         // 1.组装翻转菜单
         showMenus(menus, mv);
         // 2.外烩服务
-        getWaihuiServer(getMenu(menus, HomeMenuEnum.SERVER), mv);
+        getWaihuiServer(menus, mv);
         // 3.精选菜单
-        getSelectMenu(getMenu(menus, HomeMenuEnum.BOOK), mv);
+        getSelectMenu(menus, mv);
         // 4.公司资质
-        getCompany(getMenu(menus, HomeMenuEnum.COMPANY), mv);
+        getCompany(menus, mv);
         // 5.活动案例
-        getActivity(getMenu(menus, HomeMenuEnum.ACITIVITY), mv);
+        getActivity(menus, mv);
         // 6.联系我们
-        getContactUs(getMenu(menus, HomeMenuEnum.CONTACT), mv);
+        getContactUs(menus, mv);
 
         if (StringUtils.isBlank(mId)){
-            mId = (menus.get(0)).getHomeMenuDto().getId();
+            if (null != menus && menus.size() > 0){
+                if (null != menus.get(0).getHomeMenuDto())
+                mId = (menus.get(0)).getHomeMenuDto().getId();
+            }
         }
         mv.addObject("menuId", mId);
         mv.setViewName("/index");
@@ -83,25 +91,14 @@ public class IndexController extends BaseController{
     private void showMenus(List<MenuDto> menus, ModelAndView mv) {
         if (null != menus && menus.size() > 0){
             List<MenuDto> list = new ArrayList<>(5);
-            for (MenuDto menu : menus){
-                if (null != menu.getHomeMenuDto()){
-                    if (menu.getHomeMenuDto().getId().equals(HomeMenuEnum.SERVER.getId())){
-                        list.add(menu);
-                    }
-                    if (menu.getHomeMenuDto().getId().equals(HomeMenuEnum.BOOK.getId())){
-                        list.add(menu);
-                    }
-                    if (menu.getHomeMenuDto().getId().equals(HomeMenuEnum.COMPANY.getId())){
-                        list.add(menu);
-                    }
-                    if (menu.getHomeMenuDto().getId().equals(HomeMenuEnum.ACITIVITY.getId())){
-                        list.add(menu);
-                    }
-                    if (menu.getHomeMenuDto().getId().equals(HomeMenuEnum.AREA.getId())){
-                        list.add(menu);
-                    }
+            for (int i = 0; i < 5; i++){
+                if (menus.size() > i+1){
+                    list.add(menus.get(i+1));
+                }else{
+                    break;
                 }
             }
+
             mv.addObject("showMenus", list);
         }
     }
@@ -115,12 +112,12 @@ public class IndexController extends BaseController{
      * @date 16/4/5 上午10:52
      * @version 1.0
      */
-    private void getWaihuiServer(MenuDto menu, ModelAndView mv) {
-        if (null != menu){
-            if (null != menu.getHomeMenuDto()){
-                List<AlbumPictureDto> pics = getPics(menu, SERVER_NUM);
+    private void getWaihuiServer(List<MenuDto> menus, ModelAndView mv) {
+        if (null != menus && menus.size() > SERVER_INDEX){
+            if (null != menus.get(SERVER_INDEX).getHomeMenuDto()){
+                List<AlbumPictureDto> pics = getPics(menus.get(SERVER_INDEX), SERVER_NUM);
                 if (null != pics){
-                    mv.addObject("server", menu.getHomeMenuDto());
+                    mv.addObject("server", menus.get(SERVER_INDEX).getHomeMenuDto());
                     mv.addObject("serverPics", pics);
                 }
             }
@@ -136,13 +133,14 @@ public class IndexController extends BaseController{
      * @date 16/4/5 上午10:58
      * @version 1.0
      */
-    private void getSelectMenu(MenuDto menu, ModelAndView mv) {
-        if (null != menu){
-            if (null != menu.getHomeMenuDto()){
-                List<AlbumPictureDto> pics = getPics(menu, BOOK_NUM);
+    private void getSelectMenu(List<MenuDto> menus, ModelAndView mv) {
+        if (null != menus && menus.size() > MENU_INDEX){
+            if (null != menus.get(MENU_INDEX).getHomeMenuDto()){
+                List<AlbumPictureDto> pics = getPics(menus.get(MENU_INDEX), BOOK_NUM);
                 if (null != pics){
-                    mv.addObject("book", menu.getHomeMenuDto());
-                    mv.addObject("bookPics", pics);
+                    mv.addObject("book", menus.get(MENU_INDEX).getHomeMenuDto());
+                    List<HomeMenuDto> subMenu = querySubMenu(menus.get(MENU_INDEX).getHomeMenuDto().getId());
+                    mv.addObject("subMenu", subMenu);
                 }
             }
         }
@@ -157,10 +155,10 @@ public class IndexController extends BaseController{
      * @date 16/4/5 上午10:59
      * @version 1.0
      */
-    private void getCompany(MenuDto menu, ModelAndView mv) {
-        if (null != menu){
-            if (null != menu.getHomeMenuDto()){
-                mv.addObject("company", menu.getHomeMenuDto());
+    private void getCompany(List<MenuDto> menus, ModelAndView mv) {
+        if (null != menus && menus.size() > COMPANY_INDEX){
+            if (null != menus.get(COMPANY_INDEX).getHomeMenuDto()){
+                mv.addObject("company", menus.get(COMPANY_INDEX).getHomeMenuDto());
             }
         }
     }
@@ -174,10 +172,10 @@ public class IndexController extends BaseController{
      * @date 16/4/5 上午11:00
      * @version 1.0
      */
-    private void getActivity(MenuDto menu, ModelAndView mv) {
-        if (null != menu){
-            if (null != menu.getHomeMenuDto()){
-                mv.addObject("activity", menu.getHomeMenuDto());
+    private void getActivity(List<MenuDto> menus, ModelAndView mv) {
+        if (null != menus && menus.size() > ACTIVE_INDEX){
+            if (null != menus.get(ACTIVE_INDEX).getHomeMenuDto()){
+                mv.addObject("activity", menus.get(ACTIVE_INDEX).getHomeMenuDto());
             }
         }
     }
@@ -191,36 +189,12 @@ public class IndexController extends BaseController{
      * @date 16/4/5 上午11:02
      * @version 1.0
      */
-    private void getContactUs(MenuDto menu, ModelAndView mv) {
-        if (null != menu){
-            if (null != menu.getHomeMenuDto()){
-                mv.addObject("contact", menu.getHomeMenuDto());
+    private void getContactUs(List<MenuDto> menus, ModelAndView mv) {
+        if (null != menus && menus.size() > CONTACT_INDEX){
+            if (null != menus.get(CONTACT_INDEX).getHomeMenuDto()) {
+                mv.addObject("contact", menus.get(CONTACT_INDEX).getHomeMenuDto());
             }
         }
-    }
-
-    /**
-     * <p>Description: 根据菜单枚举变量获取菜单信息,注:会对menus集合进行删除操作,减少下次查找数据基数 </p>
-     * <p>Company: 上海天坊信息科技有限公司</p>
-     * @param
-     * @return
-     * @author wangxiang
-     * @date 16/4/6 下午2:06
-     * @version 1.0
-     */
-    private MenuDto getMenu(List<MenuDto> menus, HomeMenuEnum e){
-        if (null != menus && menus.size() > 0 ){
-            Iterator<MenuDto> it = menus.iterator();
-            MenuDto menu;
-            while (it.hasNext()){
-                menu = it.next();
-                if (null != menu.getHomeMenuDto() && menu.getHomeMenuDto().getId().equals(e.getId())){
-                    it.remove();
-                    return menu;
-                }
-            }
-        }
-        return null;
     }
 
     /**

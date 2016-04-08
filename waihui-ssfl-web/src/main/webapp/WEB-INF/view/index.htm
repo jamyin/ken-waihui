@@ -36,7 +36,7 @@
         </div>
          <#if menuList??>
              <#list showMenus as menu>
-                 <a id="side2_item${menu_index+1}" class="card_Container" href="${(menu.homeMenuDto.menuUrl)!}">
+                 <a id="side2_item${menu_index+1}" class="card_Container" href="${(menu.homeMenuDto.menuUrl)!}?mId=${(menu.homeMenuDto.id)!}">
                      <div id="mask"><img src="${wwwdomain!}${(menu.homeMenuDto.picture)!}" border="0"></div>
                      <div id="cover"><img src="${wwwdomain!}${(menu.homeMenuDto.picture)!}" border="0"></div>
                      <span>${(menu.homeMenuDto.cname)!}</span>
@@ -55,7 +55,7 @@
             <div class="side3_title_f">
                 ${(server.summary)!}
             </div>
-            <a class="more" href="###">更多</a>
+            <a class="more" href="${(server.menuUrl)!}?mId=${(server.id)!}">更多</a>
 
             <div class="side3_cont">
                 <div class="picker">
@@ -77,7 +77,7 @@
                     </#list>
                 </#if>
 
-                <a class="more" href="###"><span>更多</span></a>
+                <a class="more" href="${(server.menuUrl)!}?mId=${(server.id)!}"><span>更多</span></a>
             </div>
         </div>
 
@@ -98,12 +98,12 @@
 
             <div class="side4_cont">
                 <ul>
-                    <#if bookPics??>
-                        <#list bookPics as pic>
+                    <#if subMenu??>
+                        <#list subMenu as sub>
                             <li>
-                                <img src="${(wwwdomain)!}${(pic.pic)!}" border="0">
-                                <p>${(pic.described)!}<br><span class="simsum">${(pic.enDescribe)!}</span></p>
-                                <a href="###"><span>更多</span></a>
+                                <img src="${(wwwdomain)!}${(sub.picture)!}" border="0">
+                                <p>${(sub.cname)!}<br><span class="simsum">${(sub.ename)!}</span></p>
+                                <a href="${(book.menuUrl)!}?mId=${(book.id)!}"><span>更多</span></a>
                             </li>
                         </#list>
                     </#if>
@@ -123,7 +123,7 @@
             <div class="side5_title_f">
                 ${(company.summary)!}
             </div>
-            <a class="more" href="###"><span>更多</span></a>
+            <a class="more" href="${(company.menuUrl)!}?mId=${(company.id)!}"><span>更多</span></a>
         </div>
     </div>
 
@@ -138,7 +138,7 @@
             <div class="side6_title_f">
                 ${(activity.summary)!}
             </div>
-            <a class="more" href="###"><span>更多</span></a>
+            <a class="more" href="${(activity.menuUrl)!}?mId=${(activity.id)!}"><span>更多</span></a>
         </div>
     </div>
 
@@ -150,10 +150,9 @@
 
         <div class="side_box side7bg">
             <div class="side7_right"></div>
-            <div class="side7_title_f">运营总部：<br>上海市徐汇区淮海中路1010号嘉华中心3203-3204室<br><br>官方网站：http://www.jujucatering.com/contact.html<br><br>联系方式：400-9928-219<br>
-                传真：021-3383-1679<br>邮箱：jujuCatering@ssic.cn
+            <div class="side7_title_f">${(contact.summary)!}
             </div>
-            <a class="more" href="###"><span>更多</span></a>
+            <a class="more" href="${(contact.menuUrl)!}?mId=${(contact.id)!}"><span>更多</span></a>
         </div>
     </div>
 </div>

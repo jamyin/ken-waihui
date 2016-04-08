@@ -27,7 +27,7 @@ public class ContactUsController extends BaseController {
     public ModelAndView index(String mId) {
         ModelAndView mv = getModelAndView();
         HomeMenuDto contactus = homeMenuService.findById(mId);
-        List<HomeMenuDto> subMenu = homeMenuService.findByParentId(mId);
+        List<HomeMenuDto> subMenu = querySubMenu(mId);
 
         mv.addObject("contactus", contactus);
         mv.addObject("subMenu", subMenu);

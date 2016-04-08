@@ -28,7 +28,7 @@ public class ActiveController extends BaseController {
     public ModelAndView index(String mId){
         ModelAndView mv = getModelAndView();
         HomeMenuDto active = homeMenuService.findById(mId);
-        List<HomeMenuDto> subMenu = homeMenuService.findByParentId(mId);
+        List<HomeMenuDto> subMenu = querySubMenu(mId);
 
         mv.addObject("active", active);
         mv.addObject("subMenu", subMenu);

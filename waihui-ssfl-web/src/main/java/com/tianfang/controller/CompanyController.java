@@ -27,7 +27,7 @@ public class CompanyController extends BaseController {
     public ModelAndView index(String mId){
         ModelAndView mv = getModelAndView();
         HomeMenuDto company = homeMenuService.findById(mId);
-        List<HomeMenuDto> subMenu = homeMenuService.findByParentId(mId);
+        List<HomeMenuDto> subMenu = querySubMenu(mId);
 
         mv.addObject("company", company);
         mv.addObject("subMenu", subMenu);
