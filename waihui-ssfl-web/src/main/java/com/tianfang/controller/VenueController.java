@@ -3,7 +3,6 @@ package com.tianfang.controller;
 import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.admin.service.IHomeMenuService;
 import com.tianfang.business.dto.AlbumPictureDto;
-import com.tianfang.business.service.IAlbumPicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +24,12 @@ public class VenueController extends BaseController {
 
     @Autowired
     private IHomeMenuService homeMenuService;
-    @Autowired
-    private IAlbumPicService picService;
 
     @RequestMapping(value = "index")
     public ModelAndView index(String mId){
         ModelAndView mv = getModelAndView();
         HomeMenuDto venue = homeMenuService.findById(mId);
-        AlbumPictureDto param = new AlbumPictureDto();
-        param.setMenuType(mId);
-        List<AlbumPictureDto> pics = picService.findTeamAlbumPic(param);
+        List<AlbumPictureDto> pics = queryMenuPics(mId);
 
         mv.addObject("pics", pics);
         mv.addObject("venue", venue);

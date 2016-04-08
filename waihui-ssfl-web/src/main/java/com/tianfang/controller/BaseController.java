@@ -1,8 +1,12 @@
 package com.tianfang.controller;
 
+import com.tianfang.admin.dto.HomeMenuDto;
 import com.tianfang.admin.dto.MenuDto;
 import com.tianfang.admin.service.IHomeMenuService;
+import com.tianfang.business.dto.AlbumPictureDto;
+import com.tianfang.business.service.IAlbumPicService;
 import com.tianfang.common.util.PropertiesUtils;
+import com.tianfang.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,7 +29,10 @@ public class BaseController {
     @Autowired
     private IHomeMenuService homeMenuService;
     @Autowired
+    private IAlbumPicService picService;
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
     private final static String TAG = "tianfang";
     private final static String _MENU = "_menu";
 
@@ -50,7 +57,9 @@ public class BaseController {
         if(null != redisTemplate.opsForValue().get(keyCode)){
             homeMenuList = (List<MenuDto>)redisTemplate.opsForValue().get(keyCode);
         }else{
-            homeMenuList = homeMenuService.findHomeMenuList(null);
+            HomeMenuDto param = new HomeMenuDto();
+            param.setMenuType("1");
+            homeMenuList = homeMenuService.findHomeMenuList(param);
             redisTemplate.opsForValue().set(keyCode, homeMenuList, 1, TimeUnit.HOURS);
         }
         return homeMenuList;
@@ -68,4 +77,40 @@ public class BaseController {
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
+
+    /**
+     * <p>Description: 根据菜单Id查询图片 </p>
+     * <p>Company: 上海天坊信息科技有限公司</p>
+     * @param mId 菜单id
+     * @return List<AlbumPictureDto>
+     * @author wangxiang
+     * @date 16/4/8 下午3:10
+     * @version 1.0
+     */
+    public List<AlbumPictureDto> queryMenuPics(String mId){
+        if (StringUtils.isBlank(mId)){
+            return null;
+        }
+        AlbumPictureDto param = new AlbumPictureDto();
+        param.setMenuType(mId);
+        List<AlbumPictureDto> pics = picService.findTeamAlbumPic(param);
+        return pics;
+    }
+
+    /**		
+     * <p>Description: 根据菜单id,查询该菜单下的子菜单 </p>
+     * <p>Company: 上海天坊信息科技有限公司</p>
+     * @param mId
+     * @return List<HomeMenuDto>
+     * @author wangxiang	
+     * @date 16/4/8 下午3:12
+     * @version 1.0
+     */
+    public List<HomeMenuDto> querySubMenu(String mId){
+        if (StringUtils.isBlank(mId)){
+            return null;
+        }
+        return homeMenuService.findByParentId(mId);
+    }
+
 }
