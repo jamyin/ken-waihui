@@ -86,6 +86,14 @@
 			
     <script>
 	$(function(){
+		// 根据id选中菜单
+		$('.mu').each(function(){
+			if ($(this).attr("menuId") == "${(menuId)!}"){
+				$(this).addClass("cur");
+				return;
+			}
+		});
+
 		//菜单变化
 		$('.mu').hover(function(){
 			$(this).html($(this).attr('e_data'))

@@ -10,33 +10,28 @@
 <body>
 	<div class="wrapper">
 		<#include "/common/nav.htm"/>
-		<div class="page_title4"></div>
+		<div class="page_title5"></div>
+		<div class="active_box">
+			<div class="subtitle">${(active.cname)!}<span class="curfont">${(active.ename)!}</span></div>
+			${(active.content)!}
+		</div>
+
 		<#if subMenu??>
-			<#list subMenu as sub>
-				<#if sub_index == 0>
-					<div class="company_box">
-				</#if>
-				<#if sub_index == 1>
-					<div class="company_box factory">
-				</#if>
-				<#if sub_index == 2>
-					<div class="company_box qualifications">
-				</#if>
-				<#if sub_index == 3>
-					<div class="company_box certification">
-				</#if>
-					<div class="subtitle">${(sub.cname)!}<span class="curfont">${(sub.ename)!}</span></div>
-					${(sub.content)!}
-				</div>
-			</#list>
+			<div class="active_list_box">
+				<ul>
+					<#list subMenu as sub>
+						<li>
+							<h3>${(sub.cname)!}</h3>
+							<h4 class="curfont">${(sub.ename)!}</h4>
+							${(sub.content)!}
+						</li>
+					</#list>
+				</ul>
+			</div>
 		</#if>
 
 		<#include "/common/foot.htm"/>
 	</div>
-			
-			
-			
-			
     <script>
 	$(function(){
 		// 根据id选中菜单
