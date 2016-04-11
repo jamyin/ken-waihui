@@ -84,15 +84,14 @@
 							<th class="center">
 								<label><input type="checkbox" /><span class="lbl"></span></label>
 							</th>
-							<th>中文名</th>
-							<th>英文名</th>
+							<th class="span2">中文名</th>
+							<th class="span2">英文名</th>
 							<th>菜单级别</th>
+							<th class="span2">父级菜单</th>
 							<th>显示类型</th>
-							<!-- <th>页面模板</th>
-							<th>视频类型</th> -->
 							<th>菜单链接</th>
 							<th>发布时间</th>
-							<th style="width: 75px;">菜单排序</th>
+							<th class="span2">菜单排序</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -111,6 +110,7 @@
 												<#if page.menuType?eval == type.getIndex()>${type.getName()}</#if>
 										</#list>
 									</td>
+									<td>${(page.pname)!}</td>
 									<td>
 										<#list showTypes as type>
 												<#if page.issingle?eval == type.getIndex()>${type.getName()}</#if>
@@ -450,9 +450,7 @@
 			$('.date-picker').datepicker();			
 			//下拉框
 			$(".chzn-select").chosen(); 
-			$(".chzn-select-deselect").chosen({allow_single_deselect:true}); 
-			
-			
+
 			$("#add").on('click',function(){
 				//iframe层-父子操作
 				layer.open({

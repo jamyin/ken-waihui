@@ -9,7 +9,6 @@ import com.tianfang.admin.dto.MenuDto;
 import com.tianfang.common.model.PageQuery;
 import com.tianfang.common.model.PageResult;
 
-@Service
 public interface IHomeMenuService {
 	public List<MenuDto> findHomeMenuList(HomeMenuDto dto);
 	
