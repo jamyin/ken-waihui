@@ -545,9 +545,7 @@
 
 					if (currentSlideIndex == 0) {
 						$('.side1_logo, .side1_slogan').addClass('show')
-			        }else{
-						$('.side1_logo, .side1_slogan').removeClass('show')
-					}
+			        }
 					
 					if (currentSlideIndex == 1) {
 						$('.card_Container').addClass('show')
