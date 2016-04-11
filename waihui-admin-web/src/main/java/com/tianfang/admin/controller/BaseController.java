@@ -1,11 +1,15 @@
 package com.tianfang.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.tianfang.admin.dto.HomeMenuDto;
+import com.tianfang.admin.service.IHomeMenuService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,9 +35,10 @@ public class BaseController {
 
 	@Autowired
 	private IAdminMenuService menuService;
-	
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
+	@Autowired
+	private IHomeMenuService homeMenuService;
 	
 	/**
 	 * 得到最左边的菜单列表
@@ -144,5 +149,33 @@ public class BaseController {
 	public static void logAfter(Logger logger){
 		logger.info("end");
 		logger.info("");
+	}
+
+	public List<HomeMenuDto> getCacheHomeMenu(){
+		String keyCode = CacheKey.CACHE_HOME_MENU;
+		List<HomeMenuDto> all;
+		if(null != redisTemplate.opsForValue().get(keyCode)){
+			all = (List<HomeMenuDto>)redisTemplate.opsForValue().get(keyCode);
+		}else{
+			all = homeMenuService.findAll();
+			redisTemplate.opsForValue().set(keyCode, all, 1, TimeUnit.HOURS);
+		}
+		return all;
+	}
+
+	public Map<String, HomeMenuDto>  getHomeMenuMap(){
+		List<HomeMenuDto> cacheHomeMenu = getCacheHomeMenu();
+		if (null != cacheHomeMenu && cacheHomeMenu.size() > 0){
+			Map<String, HomeMenuDto> map = new HashMap<>(cacheHomeMenu.size());
+			for (HomeMenuDto dto : cacheHomeMenu){
+				map.put(dto.getId(), dto);
+			}
+			return map;
+		}
+		return null;
+	}
+
+	public void cleanCacheHomeMenu(){
+		redisTemplate.delete(CacheKey.CACHE_HOME_MENU);
 	}
 }
