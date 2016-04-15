@@ -234,18 +234,10 @@
 
 	<profiles>
 		<profile>
-			<id>mac</id>
+			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<build>
-				<filters>
-					<filter>src/main/properties/mac.properties</filter>
-				</filters>
-			</build>
-		</profile>
-		<profile>
-			<id>dev</id>
 			<build>
 				<filters>
 					<filter>src/main/properties/dev.properties</filter>
