@@ -19,7 +19,7 @@
 		<#if subMenus??>
 			<#list subMenus as sub>
 				<div class="party_style">
-					<div class="subtitle">宴会类型<span class="curfont">The Party Type</span></div>
+					<div class="subtitle">${(sub.menu.cname)}<span class="curfont">${(sub.menu.ename)}</span></div>
 					<ul>
 						<#if sub.pics??>
 							<#list sub.pics as pic>
