@@ -27,8 +27,12 @@
 									<img src="${(wwwdomain)!}${(pic.pic)!}" border="0">
 									<div class="cont"><h2>${(pic.title)!}</h2><br>
 										<h3 class="curfont">${(pic.enTitle)!}</h3><br>
-										<span>${(pic.described)!}</span><br>
-										<span class="curfont">${(pic.enDescribed)!}</span>
+										<#if pic.described??>
+											<span>${(pic.described)!}</span><br>
+										</#if>
+										<#if pic.enDescribed??>
+											<span class="curfont">${(pic.enDescribed)!}</span>
+										</#if>
 									</div>
 								</li>
 							</#list>

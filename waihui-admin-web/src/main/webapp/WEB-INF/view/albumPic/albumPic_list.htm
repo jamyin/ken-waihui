@@ -157,7 +157,8 @@
 										<th style="width: 200px;">英文标题</th>
 										<th class="hidden-phone" style="width: 100px;"><i
 											class="icon-time hidden-phone"></i>上传时间</th>
-										<th style="width: 100px;">审核状态</th>
+										<th style="width: 80px;">菜单排序</th>
+										<th style="width: 80px;">审核状态</th>
 										<th style="width: 100px;">操作</th>
 									</tr>
 								</thead>
@@ -210,7 +211,7 @@
 										<td class='hidden-phone'>${(page.title)!}</td>
 										<td class='hidden-phone'>${(page.enTitle)!}</td>
 										<td class='hidden-phone'>${(page.createTimeStr)!}</td>
-
+										<td><input type="text" class="up_order span8" value="${(page.orderNo)!}" obj-id="${(page.id)!}" old-order="${(page.orderNo)!}" /></td>
 										<td class='hidden-phone'><#if page.picStatus = 1 > <span
 											class='label label-success'>审核通过</span> </#if> <#if
 											page.picStatus = 0 > <span class='label'>待审核</span> </#if>
@@ -560,6 +561,53 @@
 					$(this).closest('tr').toggleClass('selected');
 				});
 					
+			});
+			
+			//修改相片排序
+			$(".up_order").on('blur',function(){
+				var obj = $(this);
+				var id = obj.attr("obj-id");
+				var _old = obj.attr("old-order");
+				var _new = obj.val();
+				var rex= /^[0-9]*$/;
+				if(rex.test(_new)){
+					if (_new != _old){
+						$.ajax({
+				             type: "POST",
+				             url: "${base}/albumPic/updateOrder.do",
+				             data: {id:id,orderNo:_new},
+				             dataType: "json",
+				             success: function(data){
+				            	 if(data.success){
+			            			layer.msg('更新照片排序成功', {
+			            				shade: [0.9, '#000'],
+			            			    icon: 6,
+			            			    time: 1500 //2秒关闭（如果不配置，默认是3秒）
+			            			}, function(){
+			            				reload_page();
+			            			});		            		 
+				            	 }else{
+			            			layer.msg('更新照片排序失败', {
+			            				shade: [0.9, '#000'],
+			            			    icon: 6,
+			            			    time: 1500 //2秒关闭（如果不配置，默认是3秒）
+			            			},function(){
+			            				return;
+			            			});
+				            	 }
+				             }
+				         });
+					}
+				}else{
+					layer.msg('输入的不是数字', {
+        				shade: [0.9, '#000'],
+        			    icon: 6,
+        			    time: 1500 //2秒关闭（如果不配置，默认是3秒）
+        			},function(){
+        				return;
+        			});
+				};
+				
 			});
 		});
 		
