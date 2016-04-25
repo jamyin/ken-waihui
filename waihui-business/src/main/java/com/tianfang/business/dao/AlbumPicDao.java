@@ -95,7 +95,7 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 		Criteria criteria = example.createCriteria();
 		assemblyParams(albumPictureDto, criteria);
 		if(!Objects.equal(albumPictureDto.getLimit(),null)){
-			example.setOrderByClause("create_time desc limit " + albumPictureDto.getLimit());
+			example.setOrderByClause(" order_no DESC,create_time DESC limit " + albumPictureDto.getLimit());
 		}
 		return mapper.selectByExample(example);
 	}
@@ -128,7 +128,7 @@ public class AlbumPicDao extends MyBatisBaseDao<AlbumPicture>{
 			PageQuery page) {
 		AlbumPictureExample example = new AlbumPictureExample();
 		AlbumPictureExample.Criteria criteria = example.createCriteria();
-		example.setOrderByClause(" create_time DESC limit " + page.getStartNum() +"," + page.getPageSize());
+		example.setOrderByClause(" order_no DESC,create_time DESC limit " + page.getStartNum() +"," + page.getPageSize());
         assemblyParams(albumPic, criteria);   //组装参数
         List<AlbumPicture> result = mapper.selectByExample(example);  
         return result;

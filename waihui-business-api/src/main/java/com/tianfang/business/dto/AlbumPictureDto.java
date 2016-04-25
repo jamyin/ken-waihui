@@ -105,4 +105,8 @@ public class AlbumPictureDto implements Serializable {
 	@Setter	
     private String menuType; //菜单类型
 	
+	@Getter
+	@Setter
+	private Integer orderNo; //照片排序
+	
 }

@@ -194,4 +194,22 @@ public class AlbumPicController extends BaseController{
 		mv.setViewName("/albumPic/albumPic_list");
 		return mv;
 	}
+	
+   /**
+    * @Title: updateOrder
+    * @Description: TODO(更新照片排序)
+    * @param @param homeMenuDto
+    * @param @return    设定文件
+    * @return Map<String,Object>    返回类型
+    * @throws
+    */
+    @RequestMapping("/updateOrder")
+    @ResponseBody
+    public Map<String, Object> updateOrder(AlbumPictureDto albumPictureDto) {
+        Integer result = iAlbumPicService.updateAlbumPic(albumPictureDto);
+        if (result == 1) {
+            return MessageResp.getMessage(true, "更新照片排序成功");
+        }
+        return MessageResp.getMessage(false, "更新照片排序失败");
+    }
 }

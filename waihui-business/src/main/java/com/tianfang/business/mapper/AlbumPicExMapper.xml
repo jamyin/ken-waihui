@@ -13,7 +13,7 @@
 		<!-- LEFT JOIN sport_team c on a.team_id = c.id -->
 		WHERE a.stat =1 
 		<include refid="where_assistant_bypage" />
-		ORDER BY a.create_time desc
+		ORDER BY a.order_no DESC,a.create_time desc
 		limit #{page.startNum}, #{page.pageSize}
 	</select>
 
