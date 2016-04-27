@@ -117,14 +117,11 @@
 					<ul move=0>
 						<#if subMenu??>
                         <#list subMenu as sub>
-                        	<#if sub.isShow?? && sub.isShow == 1>
                             <li>
 	                                <img src="${(wwwdomain)!}${(sub.picture)!}" border="0">
 	                                <p>${(sub.cname)!}<br><span class="simsum">${(sub.ename)!}</span></p>
                                 	<!-- <a href="${(book.menuUrl)!}?mId=${(book.id)!}"><span>更多</span></a> -->
                             </li>
-                            <#else>
-                            </#if>
                         </#list>
                     	</#if>
 					</ul>

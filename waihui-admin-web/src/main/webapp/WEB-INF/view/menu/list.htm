@@ -92,7 +92,7 @@
 							<th>菜单链接</th>
 							<th>发布时间</th>
 							<th class="span2">菜单排序</th>
-							<th class="span2">首页显示</th>
+							<th class="span2">内页显示</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -141,12 +141,12 @@
 									<td class='hidden-phone'>
 									<#if page.isShow ?? > 
 										<#if page.isShow = 1> 
-											<span class='label label-success'>首页显示</span> 
+											<span class='label label-success'>内页显示</span> 
 										<#else>
-											<span class='label'>首页不显示</span> 
+											<span class='label'>内页不显示</span> 
 										</#if>
 									<#else>
-										<span class='label label-success'>首页显示</span> 
+										<span class='label label-success'>内页显示</span> 
 									</#if> 
 									</td>
 									<td>
@@ -155,13 +155,13 @@
 											<a id='deleteObj' data-obj-id="${(page.id)!}" class='btn btn-mini btn-danger' title="删除"><i class='icon-trash'></i></a>
 											<#if page.isShow ?? > 
 												<#if page.isShow = 0 > <a data-obj-id="${(page.id)!}" data-obj-stat="1"
-														class='btn btn-mini btn-success isShow' title="首页显示"><i class=''></i>首页显示</a>
+														class='btn btn-mini btn-success isShow' title="内页显示"><i class=''></i>内页显示</a>
 												<#elseif page.isShow = 1 > <a id="isShow" data-obj-id="${(page.id)!}" data-obj-stat="0"
-														class='btn btn-mini isShow' title="首页不显示"><i class=''></i>首页不显示</a>
+														class='btn btn-mini isShow' title="内页不显示"><i class=''></i>内页不显示</a>
 												</#if>
 											<#else>
 											<a id="isShow" data-obj-id="${(page.id)!}" data-obj-stat="0"
-														class='btn btn-mini isShow' title="首页不显示"><i class=''></i>首页不显示</a>
+														class='btn btn-mini isShow' title="内页不显示"><i class=''></i>内页不显示</a>
 											</#if> 
 										</div>
 									</td>
