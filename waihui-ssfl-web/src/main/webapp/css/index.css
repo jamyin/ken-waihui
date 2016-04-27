@@ -59,7 +59,7 @@ a{text-decoration:none}
 .card_Container:hover #cover{opacity:1; -webkit-transform-origin:50%; -webkit-transform:scale(1,1);}
 .card_Container #mask img{-webkit-filter:grayscale(1);}
 
-.more{position:absolute;padding-right:14px;background:url(../img/arrow_more.png) no-repeat right center}
+.more{position:absolute;padding-right:14px;background:url(../img/arrow_more.png) no-repeat right center;z-index:9}
 .side_box{position:absolute;width:1000px;height:580px;left:50%;top:50%;margin:-270px 0 0 -500px;font-size:14px;text-align:left;}
 .side_box.side3bg{}
 .side_box.side3bg .more{right:3%;bottom:67%;}
@@ -91,9 +91,9 @@ a{text-decoration:none}
 
 
 
-.side4_title_f{position:absolute;right:5%;bottom:67%;width:360px;overflow:hidden;padding:50px 80px 0 0;background:url(../img/side4_title_f.png) no-repeat right 0;background-size:60% auto;line-height:20px}
-.side4_cont{position:absolute;width:1000px;height:65%;bottom:0;left:0;}
-.side4_cont ul{position:absolute;top:20px;left:0;width:100%;height:100%;background:#fff}
+.side4_title_f{position:absolute;right:5%;bottom:67%;width:360px;overflow:hidden;padding:50px 80px 0 0;background:url(../img/side4_title_f.png) no-repeat right 0;background-size:60% auto;line-height:20px;z-index:2}
+.side4_cont{position:absolute;width:1000px;height:100%;top:0;left:0;background:#fff;z-index:0}
+/*.side4_cont ul{position:absolute;top:20px;left:0;width:100%;height:100%;background:#fff;}
 .side4_cont ul li{width:333px;height:100%;float:left;overflow:hidden;}
 .side4_cont ul li:nth-child(2){width:334px;}
 .side4_cont ul li img{position:relative;width:100%;height:auto;margin-top:-40px}
@@ -102,7 +102,15 @@ a{text-decoration:none}
 .side4_cont ul li a{display:block;width:130px;height:20px;background:#000 url(../img/arrow_more.png) no-repeat center center;margin:0 auto}
 .side4_cont ul li a span{display:none;text-align:center;font-size:12px;line-height:16px;color:#000}
 .side4_cont ul li a:hover{background:#fff;border:1px #000 solid}
-.side4_cont ul li a:hover span{display:block}
+.side4_cont ul li a:hover span{display:block}*/
+
+.side4_cont .picker2{position:absolute;width:100%;height:100%;overflow:hidden;background:#60F}
+.side4_cont .picker2 ul{position:relative;width:10000px;overflow:hidden;margin:0;transition: all 0.5s ease-out 0s;}
+.side4_cont .picker2 ul li{position:relative;width:1000px;padding:0;float:left;overflow:hidden;}
+.side4_cont .picker2 ul li img{width:100%;height:auto;margin:0 auto}
+.side4_cont .leftbtn{position:absolute;width:29px;height:54px;background:url(../img/picker_left.png) no-repeat;left:10px;top:263px;cursor:pointer;z-index:3}
+.side4_cont .rightbtn{position:absolute;width:29px;height:54px;background:url(../img/picker_right.png) no-repeat;top:263px;right:10px;cursor:pointer;z-index:3}
+.mas{position:absolute;top:0;left:0;background:url(../img/black_line.png) repeat-y;width:100%;height:35%;z-index:1}
 
 
 .triangle{position:absolute;width:0;height:0;/*border-bottom:534px #2b76ae solid;*/border-right: 1000px solid transparent;opacity:.8}

@@ -18,8 +18,8 @@
 
 		<#if subMenu??>
 			<#list subMenu as sub>
-				<div class="menu_style">
-					<div class="subtitle">${(sub.menu.cname)!}<span class="curfont">${(sub.menu.ename)!}e</span></div>
+				<div class="menu_style picker">
+					<div class="subtitle">${(sub.menu.cname)!}<span class="curfont">${(sub.menu.ename)!}</span></div>
 						<#if sub.pics??>
 							<!--图片轮播-->
 							<#if sub.menu.issingle == 2>
@@ -29,9 +29,10 @@
 											<li><img src="${(wwwdomain)!}${(pic.pic)!}" border="0"></li>
 										</#list>
 									</ul>
-									<div class="leftbtn"></div>
-									<div class="rightbtn"></div>
 								</div>
+								<div class="leftbtn"></div>
+								<div class="rightbtn"></div>
+				
 							</#if>
 							<!--图片列表-->
 							<#if sub.menu.issingle == 3>
@@ -47,7 +48,7 @@
 								</ul>
 							</#if>
 						</#if>
-					</div>
+				</div>			
 			</#list>
 		</#if>
 
@@ -72,11 +73,11 @@
 		});
 		//向左滚动
 		$(".leftbtn").on("click", function() {
-			moveLeft($(this).parent().find('ul'), 800);
+			moveLeft($(this).parent().find('ul'), 900);
 		});
 		//向右滚动
 		$(".rightbtn").on("click", function() {
-			moveRight($(this).parent().find('ul'), -800);
+			moveRight($(this).parent().find('ul'), -900);
 		});
 	})
 	
@@ -94,7 +95,7 @@
 	};
 	
 	function moveRight(selector, distance) {
-		var _count = selector.find('li').length*800 - 800;
+		var _count = selector.find('li').length*900 - 900;
 		var _move = parseInt(selector.attr('move'));
 		var left = _move + distance;
 		if(_move <= -_count){

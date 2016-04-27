@@ -107,7 +107,7 @@ public class AlbumPicController extends BaseController{
 		List<HomeMenuDto> list = iHomeMenuService.findAll();
 		mv.addObject("menuTypes", list);
 		try {
-			mv.setViewName("/albumPic/albumPic_Edit");
+			mv.setViewName("/albumPic/albumPic_edit");
 			mv.addObject("msg", "update");
 			mv.addObject("pd", result);
 		} catch (Exception e) {

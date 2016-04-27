@@ -77,7 +77,7 @@
                     </#list>
                 </#if>
 
-                <a class="more" href="${(server.menuUrl)!}?mId=${(server.id)!}"><span>更多</span></a>
+               <!--  <a class="more" href="${(server.menuUrl)!}?mId=${(server.id)!}"><span>更多</span></a> -->
             </div>
         </div>
 
@@ -90,13 +90,15 @@
             <#include "/common/nav.htm"/>
         </div>
 
-        <div class="side_box side4bg" style="background:url(img/side4_title.jpg) no-repeat">
+        <div class="side_box side4bg">
+        <div class="mas"></div>
             <div class="side4_title_f">
                 ${(book.summary)!}
             </div>
-            <a class="more" href="###">更多</a>
+            <!-- <a class="more" href="###">更多</a> -->
+            <a class="more" href="${(book.menuUrl)!}?mId=${(book.id)!}">更多</a>
 
-            <div class="side4_cont">
+<!--            <div class="side4_cont">
                 <ul>
                     <#if subMenu??>
                         <#list subMenu as sub>
@@ -108,7 +110,28 @@
                         </#list>
                     </#if>
                 </ul>
-            </div>
+            </div> -->
+            
+            <div class="side4_cont">
+				<div class="picker2">
+					<ul move=0>
+						<#if subMenu??>
+                        <#list subMenu as sub>
+                        	<#if sub.isShow?? && sub.isShow == 1>
+                            <li>
+	                                <img src="${(wwwdomain)!}${(sub.picture)!}" border="0">
+	                                <p>${(sub.cname)!}<br><span class="simsum">${(sub.ename)!}</span></p>
+                                	<!-- <a href="${(book.menuUrl)!}?mId=${(book.id)!}"><span>更多</span></a> -->
+                            </li>
+                            <#else>
+                            </#if>
+                        </#list>
+                    	</#if>
+					</ul>
+				</div>
+				<div class="leftbtn"></div>
+				<div class="rightbtn"></div>
+			</div>
         </div>
 
     </div>
@@ -188,6 +211,15 @@
             var _index = $('.picker ul li.cur').index();
             moveRight(".picker ul", _index, -300);
         });
+        
+		//向左滚动
+		$(".leftbtn").on("click", function() {
+			move_Left($(this).parent().find('ul'), 1000);
+		});
+		//向右滚动
+		$(".rightbtn").on("click", function() {
+			move_Right($(this).parent().find('ul'), -1000);
+		});
     });
 
     function moveLeft(selector, index, distance) {
@@ -219,6 +251,33 @@
         }).attr('move', left);
         $('.kind').html($(selector).find('li.cur img').attr('alt'));
     }
+    
+    function move_Left(selector, distance) {
+		var _move = parseInt(selector.attr('move'))
+		var left = _move + distance
+		if(_move >= 0){
+			left = 0
+		}else{
+			left = left
+		}
+		selector.css({
+			"left": left + "px"
+		}).attr('move',left)
+	};
+	
+	function move_Right(selector, distance) {
+		var _count = selector.find('li').length*1000 - 1000
+		var _move = parseInt(selector.attr('move'))
+		var left = _move + distance
+		if(_move <= -_count){
+			left = -_count
+		}else{
+			left = left
+		}
+		selector.css({
+			"left": left + "px"
+		}).attr('move',left)
+	};
 </script>
 
 </body>

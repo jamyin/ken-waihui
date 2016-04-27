@@ -530,4 +530,8 @@ public class HomeMenuDto implements Serializable{
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+    
+    @Getter
+    @Setter 
+    private Integer isShow;  					 //首页是否显示(0:不显示;1:显示)
 }

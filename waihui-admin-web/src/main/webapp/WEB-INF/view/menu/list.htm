@@ -92,6 +92,7 @@
 							<th>菜单链接</th>
 							<th>发布时间</th>
 							<th class="span2">菜单排序</th>
+							<th class="span2">首页显示</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -137,10 +138,31 @@
 									<td>${(page.menuUrl)!}</td>
 									<td>${(page.createTime?string("yyyy-MM-dd"))!}</td>
 									<td><input type="text" class="up_order span8" value="${(page.menuOrder)!}" obj-id="${(page.id)!}" old-order="${(page.menuOrder)!}" /></td>
+									<td class='hidden-phone'>
+									<#if page.isShow ?? > 
+										<#if page.isShow = 1> 
+											<span class='label label-success'>首页显示</span> 
+										<#else>
+											<span class='label'>首页不显示</span> 
+										</#if>
+									<#else>
+										<span class='label label-success'>首页显示</span> 
+									</#if> 
+									</td>
 									<td>
 										<div id="operation" class='hidden-phone visible-desktop btn-group'>									
 											<a id='editObj' data-obj-id="${(page.id)!}" class='btn btn-mini btn-warning' title="编辑"><i class='icon-edit'></i></a>
 											<a id='deleteObj' data-obj-id="${(page.id)!}" class='btn btn-mini btn-danger' title="删除"><i class='icon-trash'></i></a>
+											<#if page.isShow ?? > 
+												<#if page.isShow = 0 > <a data-obj-id="${(page.id)!}" data-obj-stat="1"
+														class='btn btn-mini btn-success isShow' title="首页显示"><i class=''></i>首页显示</a>
+												<#elseif page.isShow = 1 > <a id="isShow" data-obj-id="${(page.id)!}" data-obj-stat="0"
+														class='btn btn-mini isShow' title="首页不显示"><i class=''></i>首页不显示</a>
+												</#if>
+											<#else>
+											<a id="isShow" data-obj-id="${(page.id)!}" data-obj-stat="0"
+														class='btn btn-mini isShow' title="首页不显示"><i class=''></i>首页不显示</a>
+											</#if> 
 										</div>
 									</td>
 								</tr>
@@ -471,6 +493,42 @@
 					$(this).closest('tr').toggleClass('selected');
 				});
 					
+			});
+			
+			//设置首页显示
+			$("#operation .isShow").on('click',function(){
+				var id = $(this).attr("data-obj-id");
+				var isShow = $(this).attr("data-obj-stat");
+				$.ajax({
+					 type: "POST",
+		             url: "${base}/menu/edit.do",
+		             data: {id:id,isShow:isShow},
+		             dataType: "json",
+		             success: function(data){
+		            	 if(data.success){
+		            			layer.msg('更改首页显示成功', {
+		            				shade: [0.9, '#000'],
+		            			    icon: 6,
+		            			    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+		            			}, function(){
+		            				reload_page();
+		            			});		            		 
+			            	 }else{
+		            			layer.msg('更改首页显示失败', {
+		            				shade: [0.9, '#000'],
+		            			    icon: 6,
+		            			    time: 1500 //2秒关闭（如果不配置，默认是3秒）
+		            			},function(){
+		            				return;
+		            			});
+			            	 }
+		             }
+				})
+				/* var path = "/admin/albumPic/findAlbumPicByPage.do?pId=200";
+				if(id != null && id !=""){
+					path = path + "&&teamId=" + id; 
+				}
+				window.location.href = path; */
 			});
 		});
 		</script>
