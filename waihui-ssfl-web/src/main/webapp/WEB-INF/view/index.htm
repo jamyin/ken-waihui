@@ -114,7 +114,8 @@
             
             <div class="side4_cont">
 				<div class="picker2">
-					<ul move=0>
+				<div class="trace" move=0>
+					<ul>
 						<#if subMenu??>
                         <#list subMenu as sub>
                             <li>
@@ -125,6 +126,7 @@
                         </#list>
                     	</#if>
 					</ul>
+				</div>
 				</div>
 				<div class="leftbtn"></div>
 				<div class="rightbtn"></div>
@@ -178,103 +180,110 @@
 </div>
 
 <script>
-    $(function () {
-        // 根据id选中菜单
-        $('.mu').each(function(){
-            if ($(this).attr("menuId") == "${(menuId)!}"){
-                $(this).addClass("cur");
-                return;
-            }
-        });
 
-        //菜单变化
-        $('.mu').hover(function(){
-            $(this).html($(this).attr('e_data'))
-        },function(){
-            $(this).html($(this).attr('c_data'))
-        });
-
-        //三角形对角高度
-        var _tHeight = $('.side5bg').height();
-        $('.triangle').css("border-bottom", _tHeight + "px #2b76ae solid");
-
-        //向左滚动
-        $(".prebtn").on("click", function () {
-            var _index = $('.picker ul li.cur').index();
-            moveLeft(".picker ul", _index, 300);
-        });
-        //向右滚动
-        $(".nxtbtn").on("click", function () {
-            var _index = $('.picker ul li.cur').index();
-            moveRight(".picker ul", _index, -300);
-        });
-        
-		//向左滚动
-		$(".leftbtn").on("click", function() {
-			move_Left($(this).parent().find('ul'), 1000);
-		});
-		//向右滚动
-		$(".rightbtn").on("click", function() {
-			move_Right($(this).parent().find('ul'), -1000);
-		});
-    });
-
-    function moveLeft(selector, index, distance) {
-        var _move = parseInt($(selector).attr('move'));
-        var left = _move + distance;
-        if (_move >= 0) {
-            left = 0;
-        } else {
-            left = left;
-            $(selector).find('li').eq(index - 1).addClass('cur').siblings().removeClass('cur');
-        }
-        $(selector).css({
-            "left": left + "px"
-        }).attr('move', left);
-        $('.kind').html($(selector).find('li.cur img').attr('alt'));
-    }
-    function moveRight(selector, index, distance) {
-        var _count = $(selector).find('li').length * 300 - 900;
-        var _move = parseInt($(selector).attr('move'));
-        var left = _move + distance;
-        if (_move <= -_count) {
-            left = -_count
-        } else {
-            left = left;
-            $(selector).find('li').eq(index + 1).addClass('cur').siblings().removeClass('cur');
-        }
-        $(selector).css({
-            "left": left + "px"
-        }).attr('move', left);
-        $('.kind').html($(selector).find('li.cur img').attr('alt'));
-    }
-    
-    function move_Left(selector, distance) {
-		var _move = parseInt(selector.attr('move'))
-		var left = _move + distance
-		if(_move >= 0){
-			left = 0
-		}else{
-			left = left
-		}
-		selector.css({
-			"left": left + "px"
-		}).attr('move',left)
-	};
+$(function(){
+	//菜单变化
+	$('.mu').hover(function(){
+		$(this).html($(this).attr('e_data'))
+	},function(){
+		$(this).html($(this).attr('c_data'))
+	});
 	
-	function move_Right(selector, distance) {
-		var _count = selector.find('li').length*1000 - 1000
-		var _move = parseInt(selector.attr('move'))
-		var left = _move + distance
-		if(_move <= -_count){
-			left = -_count
-		}else{
-			left = left
-		}
-		selector.css({
-			"left": left + "px"
-		}).attr('move',left)
-	};
+	//三角形对角高度
+	var _tHeight = $('.side5bg').height()
+	$('.triangle').css("border-bottom", _tHeight + "px #2b76ae solid")
+	
+	//向左滚动
+	$(".prebtn").on("click", function() {
+		var _index = $('.side3_cont .picker .trace ul li.cur').index()
+		moveLeft(".side3_cont .picker .trace", _index, 300);
+	});
+	//向右滚动
+	$(".nxtbtn").on("click", function() {
+		var _index = $('.side3_cont .picker .trace ul li.cur').index()
+		moveRight(".side3_cont .picker .trace", _index, -300);
+	});
+	
+	
+	//向左滚动
+	$(".leftbtn").on("click", function() {
+		move_Left($(this).parent().find('.trace'), 1000);
+	});
+	//向右滚动
+	$(".rightbtn").on("click", function() {
+		move_Right($(this).parent().find('.trace'), -1000);
+	});
+})
+
+function moveLeft(selector, index, distance) {
+	var _pickerCount = $(selector).find('ul li')
+	var _count = $(selector).find('li').length*300 - 900
+	var _move = parseInt($(selector).attr('move'))
+	var left = _move + distance
+	if(_move >= 0){
+		left=-_count
+		$(selector).find('li').eq($(selector).find('li').length-2).addClass('cur').siblings().removeClass('cur')
+	}else{
+		left = left
+		$(selector).find('li').eq(index-1).addClass('cur').siblings().removeClass('cur')
+	}
+	$(selector).css({
+		"left": left + "px"
+	}).attr('move',left)
+	$('.kind').html($(selector).find('li.cur img').attr('alt'))
+};
+
+function moveRight(selector, index, distance) {
+	var _pickerCount = $(selector).find('ul li')
+	var _count = $(selector).find('li').length*300 - 900
+	var _move = parseInt($(selector).attr('move'))
+	var left = _move + distance
+	//alert(left)
+	//alert(_move)
+	if(_move <= -_count){
+		$(selector).find('ul').append(_pickerCount.clone())
+	}
+	left = left
+	$(selector).find('li').eq(index+1).addClass('cur').siblings().removeClass('cur')
+
+	$(selector).css({
+		"left": left + "px"
+	}).attr('move',left)
+	//alert($(selector).attr('move'))
+	$('.kind').html($(selector).find('li.cur img').attr('alt'))
+};
+
+
+
+function move_Left(selector, distance) {
+	var _pickerCount = selector.find('ul').eq(0)
+	var _count = selector.find('li').length*1000 - selector.find('ul').length*1000
+	var _move = parseInt(selector.attr('move'))
+	var left = _move + distance
+	if(_move >= 0){
+		left=-_count
+	}else{
+		left = left
+	}
+	selector.css({
+		"left": left + "px"
+	}).attr('move',left)
+};
+
+function move_Right(selector, distance) {
+	var _pickerCount = selector.find('ul').eq(0)
+	var _count = selector.find('li').length*1000 - selector.find('ul').length*1000
+	var _move = parseInt(selector.attr('move'))
+	var left = _move + distance
+	if(_move <= -_count){
+		selector.append(_pickerCount.clone())
+	}
+	left = left
+
+	selector.css({
+		"left": left + "px"
+	}).attr('move',left)
+};
 </script>
 
 </body>
