@@ -25,11 +25,13 @@
 							<!--图片轮播-->
 							<#if sub.menu.issingle == 2>
 								<div class="picker">
-									<ul move=0>
+								<div class="trace" move=0>
+									<ul>
 										<#list sub.pics as pic>
 											<li><img src="${(wwwdomain)!}${(pic.pic)!}" border="0"></li>
 										</#list>
 									</ul>
+								</div>
 								</div>
 								<div class="leftbtn"></div>
 								<div class="rightbtn"></div>
@@ -60,55 +62,53 @@
 			
     <script>
 	$(function(){
-		// 根据id选中菜单
-		$('.mu').each(function(){
-			if ($(this).attr("menuId") == "${(menuId)!}"){
-				$(this).addClass("cur");
-				return;
-			}
-		});
-
 		//菜单变化
 		$('.mu').hover(function(){
-			$(this).html($(this).attr('e_data'));
+			$(this).html($(this).attr('e_data'))
 		},function(){
-			$(this).html($(this).attr('c_data'));
+			$(this).html($(this).attr('c_data'))
 		});
 		//向左滚动
 		$(".leftbtn").on("click", function() {
-			moveLeft($(this).parent().find('ul'), 900);
+			move_Left($(this).parent().find('.trace'), 900);
 		});
 		//向右滚动
 		$(".rightbtn").on("click", function() {
-			moveRight($(this).parent().find('ul'), -900);
+			move_Right($(this).parent().find('.trace'), -900);
 		});
 	})
 	
-	function moveLeft(selector, distance) {
-		var _move = parseInt(selector.attr('move'));
-		var left = _move + distance;
+
+	function move_Left(selector, distance) {
+		var _pickerCount = selector.find('ul').eq(0)
+		var _count = selector.find('li').length*900 - selector.find('ul').length*900
+		var _move = parseInt(selector.attr('move'))
+		var left = _move + distance
 		if(_move >= 0){
-			left = 0;
+			left=-_count
 		}else{
-			left = left;
+			left = left
 		}
 		selector.css({
 			"left": left + "px"
-		}).attr('move',left);
+		}).attr('move',left)
 	};
 	
-	function moveRight(selector, distance) {
-		var _count = selector.find('li').length*900 - 900;
-		var _move = parseInt(selector.attr('move'));
-		var left = _move + distance;
+	function move_Right(selector, distance) {
+		var _pickerCount = selector.find('ul').eq(0)
+		var _count = selector.find('li').length*900 - selector.find('ul').length*900
+		var _move = parseInt(selector.attr('move'))
+		var left = _move + distance
 		if(_move <= -_count){
-			left = -_count;
-		}else{
-			left = left;
+			
+			selector.append(_pickerCount.clone())
 		}
+		left = left
+	
 		selector.css({
 			"left": left + "px"
-		}).attr('move',left);
+		}).attr('move',left)
+		
 	};
     </script>
 
